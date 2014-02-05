@@ -48,3 +48,7 @@ gem 'devise'
 gem 'omniauth-github'
 gem 'thin'
 gem 'pry-rails', group: [:development, :test]
+gem 'faraday-http-cache'
+gem 'twitter-bootstrap-rails'
+
+gem 'jquery-ui-rails'

@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
         user.image = auth.info.image
         user.github_uid = auth.info.uid
         user.nickname = auth.info.nickname
+        user.token = auth.credentials.token
+        user.expires = auth.credentials.expires
         user.save!
       end
     end

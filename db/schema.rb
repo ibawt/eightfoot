@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205020544) do
+ActiveRecord::Schema.define(version: 20140205024246) do
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20140205020544) do
     t.string   "nickname"
     t.string   "github_uid"
     t.string   "image"
+    t.string   "token"
+    t.boolean  "expires"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
