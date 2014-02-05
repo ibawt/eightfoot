@@ -47,3 +47,4 @@ gem 'octokit', '~> 2.0'
 gem 'devise'
 gem 'omniauth-github'
 gem 'thin'
+gem 'pry-rails', group: [:development, :test]
