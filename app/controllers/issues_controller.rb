@@ -1,10 +1,20 @@
 class IssuesController < ApplicationController
+  before_action :set_project, only: [:index]
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
+
 
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.all
+    issues = @project.repositories.collect(&:slug).map { |repo| @client.list_issues(repo) }.flatten
+    issues.each do |i|
+      issue = Issue.find_or_create_by(:number => i.number)
+      issue.project = @project
+      issue.update(i.attrs.except(:user, :assignee, :labels, :milestone, :created_at, :updated_at, :pull_request, :id))
+      issue.save if issue.changed?
+    end
+
+    @issues = @project.issues
   end
 
   # GET /issues/1
@@ -62,6 +72,11 @@ class IssuesController < ApplicationController
   end
 
   private
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
+
+
     # Use callbacks to share common setup or constraints between actions.
     def set_issue
       @issue = Issue.find(params[:id])

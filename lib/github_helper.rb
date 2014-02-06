@@ -1,5 +1,6 @@
 module GithubHelper
   def prepare_github
+    return if current_user.nil?
     user = current_user
     @client = Octokit::Client.new :access_token => user.token
 

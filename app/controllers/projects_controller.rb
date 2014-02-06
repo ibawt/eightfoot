@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_repos, :add_repos]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_repos, :update_position]
 
   # GET /projects
   # GET /projects.json
@@ -21,16 +21,23 @@ class ProjectsController < ApplicationController
   def edit
   end
 
+  def update_position
+    params[:issue].each_with_index do |id,i|
+      issue = Issue.find(id)
+      issue.position = i
+      issue.save
+    end
+    render json: {}, :status => :ok
+  end
+
   def show_repos
     @repos = @client.repos
     @repos.each do |repo|
       r = Repository.find_or_create_by(:slug => repo.full_name)
       r.save if r.changed?
-    end
-  end
 
-  def add_repos
-    binding.pry
+      r.destroy unless repo.has_issues
+    end
   end
 
   # POST /projects
@@ -75,7 +82,7 @@ class ProjectsController < ApplicationController
 
   private
   def set_project
-    @project = Project.find(params[:id])
+    @project = Project.find(params[:id] || params[:project_id])
   end
 
   def project_params

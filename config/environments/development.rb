@@ -7,7 +7,8 @@ Eightfoot::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:4000' }
 
   config.cache_classes = false
-
+  config.preload_frameworks = true
+  config.allow_concurrency = true
   # Do not eager load code on boot.
   config.eager_load = false
 

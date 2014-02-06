@@ -1,24 +1,23 @@
 <h1>Listing issues</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @issues.each do |issue| %>
-      <tr>
-        <td><%= link_to 'Show', issue %></td>
-        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
-        <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2"/>
+    <div class="span10">
+      <div id="sortable-list" data-update-url="some-url">
+        <ul id="sortable">
+        <% @issues.each do |issue| %>
+          <li id="issue_<%= issue.id %>">
+            <div>
+              <%= issue.title %> -- <%= issue.number %>
+            </div>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 <br>
 

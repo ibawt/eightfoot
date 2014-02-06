@@ -46,9 +46,10 @@ gem 'debugger', group: [:development, :test]
 gem 'octokit', '~> 2.0'
 gem 'devise'
 gem 'omniauth-github'
-gem 'thin'
+gem 'puma'
 gem 'pry-rails', group: [:development, :test]
 gem 'faraday-http-cache'
 gem 'twitter-bootstrap-rails'
 gem 'simple_form'
 gem 'jquery-ui-rails'
+gem 'mysql2'

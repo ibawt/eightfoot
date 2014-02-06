@@ -11,20 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206161552) do
+ActiveRecord::Schema.define(version: 20140206185511) do
 
   create_table "issues", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "repository_id"
+    t.integer  "project_id"
+    t.string   "url"
+    t.string   "html_url"
+    t.integer  "number"
+    t.string   "state"
+    t.string   "title"
+    t.text     "body"
+    t.integer  "comments"
+    t.datetime "closed_at"
+    t.integer  "position"
   end
+
+  add_index "issues", ["project_id", "state", "position"], name: "index_issues_on_project_id_and_state_and_position", using: :btree
+  add_index "issues", ["repository_id"], name: "index_issues_on_repository_id", using: :btree
 
   create_table "project_repositories", force: true do |t|
     t.integer "project_id"
     t.integer "repository_id"
   end
 
-  add_index "project_repositories", ["project_id"], name: "index_project_repositories_on_project_id"
-  add_index "project_repositories", ["repository_id"], name: "index_project_repositories_on_repository_id"
+  add_index "project_repositories", ["project_id"], name: "index_project_repositories_on_project_id", using: :btree
+  add_index "project_repositories", ["repository_id"], name: "index_project_repositories_on_repository_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.string   "name"
@@ -62,7 +74,7 @@ ActiveRecord::Schema.define(version: 20140206161552) do
     t.boolean  "expires"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
