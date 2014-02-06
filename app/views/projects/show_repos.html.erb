@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+<p>Select some repos to add to <strong><%= @project.name %></strong></p>
+<%= simple_form_for @project do |f| %>
+  <%= f.association :repositories, label_method: :slug,as: :check_boxes, multiple: true %>
+  <%= f.button :submit, "Submit" %>
+<% end %>

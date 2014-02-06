@@ -11,7 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205024246) do
+ActiveRecord::Schema.define(version: 20140206161552) do
+
+  create_table "issues", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_repositories", force: true do |t|
+    t.integer "project_id"
+    t.integer "repository_id"
+  end
+
+  add_index "project_repositories", ["project_id"], name: "index_project_repositories_on_project_id"
+  add_index "project_repositories", ["repository_id"], name: "index_project_repositories_on_repository_id"
+
+  create_table "projects", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "gh_id",      limit: 8
+  end
+
+  create_table "repositories", force: true do |t|
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

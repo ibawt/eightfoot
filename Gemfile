@@ -50,5 +50,5 @@ gem 'thin'
 gem 'pry-rails', group: [:development, :test]
 gem 'faraday-http-cache'
 gem 'twitter-bootstrap-rails'
-
+gem 'simple_form'
 gem 'jquery-ui-rails'

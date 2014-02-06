@@ -1,2 +1,6 @@
 class Project < ActiveRecord::Base
+  has_many :repositories, through: :project_repositories
+  has_many :project_repositories
+
+  accepts_nested_attributes_for :repositories
 end

@@ -1,7 +1,14 @@
 Eightfoot::Application.routes.draw do
+  resources :repositories
+
   resources :issues
 
-  resources :projects
+  resources :projects do
+    member do
+      get  'show_repos'
+      post 'add_repos'
+    end
+  end
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
   resources :users

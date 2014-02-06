@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_repos, :add_repos]
 
   # GET /projects
   # GET /projects.json
@@ -19,6 +19,18 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+  end
+
+  def show_repos
+    @repos = @client.repos
+    @repos.each do |repo|
+      r = Repository.find_or_create_by(:slug => repo.full_name)
+      r.save if r.changed?
+    end
+  end
+
+  def add_repos
+    binding.pry
   end
 
   # POST /projects
@@ -62,13 +74,11 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name)
-    end
+  def project_params
+    params.require(:project).permit(:name, :repository_ids => [])
+  end
 end
