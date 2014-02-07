@@ -5,6 +5,7 @@ Eightfoot::Application.routes.draw do
   resources :projects do
     member do
       get  'show_repos'
+      post 'add_repos'
     end
     post :update_position
     resources :issues do
@@ -15,7 +16,8 @@ Eightfoot::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
   resources :users
-  root :to => 'users#index'
+
+  root :to => 'projects#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -6,6 +6,7 @@ class IssuesController < ApplicationController
   # GET /issues
   # GET /issues.json
   def index
+    @issue_map = {}
     @project.repositories.each do |repo|
       @client.list_issues(repo.slug).each do |issue|
         i = Issue.find_or_create_by(:gh_id => issue.id)
@@ -13,7 +14,9 @@ class IssuesController < ApplicationController
         i.repository = repo
         i.html_url = issue.rels[:html].href
         i.update(issue.attrs.except(:user, :assignee, :labels, :milestone, :created_at, :updated_at, :pull_request, :id))
-        issue.save if issue.changed?
+        i.save if i.changed?
+
+        @issue_map[i.id] = issue
       end
     end
 

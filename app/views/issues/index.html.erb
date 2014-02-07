@@ -1,13 +1,27 @@
-<h2><%= @project.name %></h2>
-<div class="column">
-  <% @issues.each do |issue| %>
-    <div id="issue_<%= issue.id %>" class="portlet med">
-      <div class="portlet-header">
-        <span><%= issue.title %></span>
-      </div>
-      <div class="portlet-content">
-        <a target="_blank" href="<%= issue.html_url %>">#<%= issue.number %></a>
-      </div>
-    </div>
-  <% end %>
+<div class="gridster">
+  <ul>
+    <% col = 0 %>
+    <% row = 0 %>
+    <% @issues.each_with_index do |issue,index| %>
+      <li id="issue_<%= issue.id %>" class="portlet" data-sizex="1" data-sizey="1" data-col="<%= col %>" data-row="<%= row %>">
+        <div class="portlet-header">
+          <span><%= issue.title %></span>
+          <!-- <div class="eightfoot-avatar"> -->
+          <!--   <% if user =  @issue_map[issue.id].try(:assignee) %> -->
+          <!--     <img height="100%" src="<%= user.rels[:avatar].href %>" /> -->
+          <!--   <% end %> -->
+          <!-- </div> -->
+        </div>
+        <div class="portlet-content">
+          <a target="_blank" href="<%= issue.html_url %>">#<%= issue.number %></a>
+        </div>
+        <% row = row + 1
+           if row >= 5
+             col = col + 1
+             row = 0
+           end
+           %>
+      </li>
+    <% end %>
+  </ul>
 </div>

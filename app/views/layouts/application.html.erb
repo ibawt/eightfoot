@@ -34,22 +34,18 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
-    <%= javascript_include_tag 'shapeshifter.js' %>
   </head>
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span5">
-          <%= yield %>
+  <body class="eightfoot-bg">
+    <% if current_user %>
+      <div class="navbar navbar-default eightfoot-navbar">
+        <a href="<%= destroy_user_session_path %>" class="btn eightfoot-navbar-text">Sign Out</a>
+        <div class="eightfoot-avatar pull-right">
+          <img height="100%" src="<%= @gh_user.rels[:avatar].href %>" />
         </div>
-      </div><!--/row-->
-
-      <footer>
-        <p>&copy; Company 2014</p>
-      </footer>
-
-    </div> <!-- /container -->
+      </div>
+    <% end %>
+    <div>
+      <%= yield %>
+    </div>
   </body>
 </html>

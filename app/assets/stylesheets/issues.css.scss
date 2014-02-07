@@ -1,20 +1,16 @@
 // Place all the styles related to the issues controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.container {
-    min-width: 520px;
-}
-.column {
-    width: 170px;
-    float: left;
-    padding-bottom: 100px;
-}
+ul {
+    list-style-type:none;
+    }
 .portlet {
     margin: 0 1em 0.3em 0;
     background-color: lightblue;
     border: 3px solid black;
 }
 .portlet-header {
+    word-wrap: break-word;
     padding: 0.2em 0.3em;
     margin-bottom: 0.5em;
     position: relative;

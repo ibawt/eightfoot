@@ -30,6 +30,13 @@ class ProjectsController < ApplicationController
     render json: {}, :status => :ok
   end
 
+  def add_repos
+    @repo = Repository.create(params.require(:repository).permit(:slug))
+    @repo.save
+
+    redirect_to show_repos_project_path
+  end
+
   def show_repos
     @repos = @client.repos
     @repos.each do |repo|
@@ -38,6 +45,8 @@ class ProjectsController < ApplicationController
 
       r.destroy unless repo.has_issues
     end
+
+    @repos = Repository.all
   end
 
   # POST /projects
