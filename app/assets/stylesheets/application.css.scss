@@ -1,0 +1,67 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap";
+
+.eightfoot-bg {
+    background-image:image_url("bg.jpg");
+    background-size: 100%;
+}
+
+.eightfoot-title {
+    font-size: 200px;
+    margin-top: -20px;
+}
+
+.eightfoot-navbar {
+    background-color: black;
+    min-height: 20px;
+    border-radius: 0px;
+    border: none;
+    }
+.eightfoot-avatar {
+    height: 35px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-right: 5px;
+    }
+.eightfoot-navbar-text {
+    color: white;
+    a {
+        color: #000;
+        &:visited {
+            color: #FFF;
+        }
+        &:hover {
+            color: #fff;
+            background-color: #000;
+        }
+    }
+}
+
+.btn:focus {
+    color: white;
+    }
+
+.eightfoot-description {
+    font-size: 20px;
+    padding-top: 25px;
+    padding-left: 40px;
+    }
+.github-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 400px;
+}
