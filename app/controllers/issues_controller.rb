@@ -6,12 +6,15 @@ class IssuesController < ApplicationController
   # GET /issues
   # GET /issues.json
   def index
-    issues = @project.repositories.collect(&:slug).map { |repo| @client.list_issues(repo) }.flatten
-    issues.each do |i|
-      issue = Issue.find_or_create_by(:number => i.number)
-      issue.project = @project
-      issue.update(i.attrs.except(:user, :assignee, :labels, :milestone, :created_at, :updated_at, :pull_request, :id))
-      issue.save if issue.changed?
+    @project.repositories.each do |repo|
+      @client.list_issues(repo.slug).each do |issue|
+        i = Issue.find_or_create_by(:gh_id => issue.id)
+        i.project = @project
+        i.repository = repo
+        i.html_url = issue.rels[:html].href
+        i.update(issue.attrs.except(:user, :assignee, :labels, :milestone, :created_at, :updated_at, :pull_request, :id))
+        issue.save if issue.changed?
+      end
     end
 
     @issues = @project.issues

@@ -1,24 +1,13 @@
-<h1>Listing issues</h1>
-
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span2"/>
-    <div class="span10">
-      <div id="sortable-list" data-update-url="some-url">
-        <ul id="sortable">
-        <% @issues.each do |issue| %>
-          <li id="issue_<%= issue.id %>">
-            <div>
-              <%= issue.title %> -- <%= issue.number %>
-            </div>
-          </li>
-        <% end %>
-        </ul>
+<h2><%= @project.name %></h2>
+<div class="column">
+  <% @issues.each do |issue| %>
+    <div id="issue_<%= issue.id %>" class="portlet med">
+      <div class="portlet-header">
+        <span><%= issue.title %></span>
+      </div>
+      <div class="portlet-content">
+        <a target="_blank" href="<%= issue.html_url %>">#<%= issue.number %></a>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
-
-<br>
-
-<%= link_to 'New Issue', new_issue_path %>
