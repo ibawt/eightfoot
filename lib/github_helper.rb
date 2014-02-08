@@ -7,7 +7,6 @@ module GithubHelper
       @gh_user = @client.user
       @gh_user.login
     rescue
-      binding.pry
     end
   end
 end
