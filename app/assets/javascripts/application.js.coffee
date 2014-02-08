@@ -3,6 +3,7 @@
 #= require turbolinks
 #= require_tree .
 #= require bootstrap
+#= require_tree ../../../vendor/assets/javascripts
 
 # $(document).ready ->
 #   setTimeout ->
