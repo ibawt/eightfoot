@@ -4,10 +4,15 @@
 
 $(document).on 'page:load ready page:fetch', ->
   $('.gridster ul').gridster
-    widget_margins: [4,4]
+    widget_margins: [1,1]
     widget_base_dimensions: [140,120]
-    min_cols: 5
+    avoid_overlapped_widgets: true
+    # min_cols: 5
+    # max_cols: 5
+    # max_rows: 6
 
+  gridster = $('.gridster ul').gridster().data('gridster')
+#  gridster.resize_widget_dimensions(widget_base_dimensions: [140,120])
 
   # $('.column').sortable
   #   connectWith: '.column'

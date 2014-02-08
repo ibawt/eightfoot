@@ -7,7 +7,7 @@
 }
 
 .gridster > * {
-    margin: 0 auto;
+    margin: 20px;
     -webkit-transition: height .4s, width .4s;
     -moz-transition: height .4s, width .4s;
     -o-transition: height .4s, width .4s;

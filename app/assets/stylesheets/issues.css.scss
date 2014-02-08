@@ -1,10 +1,8 @@
-// Place all the styles related to the issues controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 ul {
     list-style-type:none;
-    }
+}
 .portlet {
+    max-height: 110px;
     margin: 0 1em 0.3em 0;
     background-color: lightblue;
     border: 3px solid black;
@@ -16,62 +14,3 @@ ul {
     position: relative;
     background-color: azure;
 }
-.portlet-toggle {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    margin-top: -8px;
-}
-.portlet-content {
-    padding: 0.4em;
-}
-.portlet-placeholder {
-    border: 1px dotted black;
-    margin: 0 1em 0.3em 0;
-    height: 60px;
-}
-/* .container { */
-/*     border: 1px dashed #ccc; */
-/*     position: relative; */
-/*     height:100%; */
-/*     width: 100%; */
-/* } */
-
-/* .container > div { */
-/*     background: #CCC; */
-/*     border: 1px solid black; */
-/*     position: absolute; */
-/*     width: 80px; */
-/* } */
-
-/* .container > div[data-ss-colspan='1'] { width: 161px; } */
-
-/* .container .ss-placeholder-child { */
-/*     background: transparent; */
-/*     border: 1px dashed red; */
-/* } */
-
-.small {
-    height: 25px;
-    }
-.med {
-    height: 60px;
-    }
-.large {
-    height:180px;
-    }
-/* #masonry > li { */
-/*     width: 250px; */
-/*     display:block; */
-/*     background: #555; */
-/*     margin: 5px; */
-/* } */
-/* #masonry > li.bigun { */
-/*     width: 290px; */
-/*     height: 50px; */
-/*     background: #159; */
-/* } */
-/* #masonry > li li { */
-/*     display:block; */
-/*     height:20px; */
-/* } */
