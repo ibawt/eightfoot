@@ -2,10 +2,11 @@ ul {
     list-style-type:none;
 }
 .portlet {
-    max-height: 110px;
     margin: 0 1em 0.3em 0;
     background-color: lightblue;
     border: 3px solid black;
+}
+.portlet-content {
 }
 .portlet-header {
     word-wrap: break-word;

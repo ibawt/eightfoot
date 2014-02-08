@@ -255,5 +255,5 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE if Rails.env.development?
-  config.omniauth :github, "0fa74ec25ebc30bbca8b", "5af3518f54b4a822f66bf1e07a442e948495a6ad", scope: "public_repo,user,repo:status"
+  config.omniauth :github, ENV['CLIENT_ID'], ENV['CLIENT_SECRET'], scope: "public_repo,user,repo:status"
 end

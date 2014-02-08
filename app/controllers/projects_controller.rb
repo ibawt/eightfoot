@@ -22,11 +22,11 @@ class ProjectsController < ApplicationController
   end
 
   def update_position
-    params[:issue].each_with_index do |id,i|
-      issue = Issue.find(id)
-      issue.position = i
-      issue.save
-    end
+    # params[:issue].each_with_index do |id,i|
+    #   issue = Issue.find(id)
+    #   issue.position = i
+    #   issue.save
+    # end
     render json: {}, :status => :ok
   end
 

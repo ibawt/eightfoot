@@ -1,16 +1,16 @@
 <div class="gridster">
   <ul>
-    <% col = 0 %>
-    <% row = 0 %>
-    <% @issues.each_with_index do |issue,index| %>
-      <li id="issue_<%= issue.id %>" class="portlet" data-sizex="1" data-sizey="1" data-col="<%= col %>" data-row="<%= row %>">
+    <% col = 1 %>
+    <% row = 1 %>
+    <% @issues.each do |issue| %>
+      <li class="portlet" data-sizex="1" data-sizey="1" data-col="<%= col %>" data-row="<%= row %>">
         <div class="portlet-header">
           <span><%= issue.title %></span>
-          <!-- <div class="eightfoot-avatar"> -->
-          <!--   <% if user =  @issue_map[issue.id].try(:assignee) %> -->
-          <!--     <img height="100%" src="<%= user.rels[:avatar].href %>" /> -->
-          <!--   <% end %> -->
-          <!-- </div> -->
+          <div class="eightfoot-avatar">
+            <% if user =  @issue_map[issue.id].try(:assignee) %>
+              <img height="100%" src="<%= user.rels[:avatar].href %>" />
+            <% end %>
+          </div>
         </div>
         <div class="portlet-content">
           <a target="_blank" href="<%= issue.html_url %>">#<%= issue.number %></a>
@@ -18,7 +18,7 @@
         <% row = row + 1
            if row >= 5
              col = col + 1
-             row = 0
+             row = 1
            end
            %>
       </li>
