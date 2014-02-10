@@ -5,7 +5,7 @@ ul {
     margin: 0 1em 0.3em 0;
     background-color: lightblue;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     &::-webkit-scrollbar {
         width:5px;
     }
@@ -13,6 +13,11 @@ ul {
         background:rgba(0,0,0,0.5);
 
         border-radius:5px;
+    }
+    .gs-resize-handle-both {
+        bottom: 0;
+        right: 0;
+        background-position: center center;
     }
 }
 .portlet-content {
