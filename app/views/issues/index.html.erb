@@ -20,6 +20,12 @@
             <a target="_blank" href="<%= i.rels[:html].href %>">
               <%= i.title %>
             </a>
+            <% if i.comments.to_i > 0 %>
+            <a class="comments-link" target="_blank" href="<%= i.rels[:html].href %>">
+              <i class="fa fa-comments-o"></i>
+              <%= i.comments %>
+            </a>
+            <% end %>
           </span>
           <% if user =  i.try(:assignee) %>
             <div>

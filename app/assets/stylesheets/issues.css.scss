@@ -29,8 +29,17 @@ ul {
     padding: 0.5em;
     position: relative;
     background-color: azure;
+    &:before, &:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
 }
 
 .milestone-selector {
   margin-bottom: 1em;
+}
+
+.comments-link {
+    float: right;
 }
