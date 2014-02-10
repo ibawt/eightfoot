@@ -11,25 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206221038) do
+ActiveRecord::Schema.define(version: 20140209140830) do
 
   create_table "issues", force: true do |t|
-    t.integer  "repository_id"
-    t.integer  "project_id"
-    t.string   "url"
-    t.string   "html_url"
-    t.integer  "number"
-    t.string   "state"
-    t.string   "title"
-    t.text     "body"
-    t.integer  "comments"
-    t.datetime "closed_at"
-    t.integer  "position"
-    t.integer  "gh_id",         limit: 8
+    t.integer "repository_id"
+    t.integer "project_id"
+    t.integer "position"
+    t.integer "gh_id",         limit: 8
   end
 
-  add_index "issues", ["gh_id"], name: "index_issues_on_gh_id", using: :btree
-  add_index "issues", ["project_id", "state", "position"], name: "index_issues_on_project_id_and_state_and_position", using: :btree
+  add_index "issues", ["project_id", "gh_id"], name: "index_issues_on_project_id_and_gh_id", using: :btree
+  add_index "issues", ["project_id", "position"], name: "index_issues_on_project_id_and_position", using: :btree
   add_index "issues", ["repository_id"], name: "index_issues_on_repository_id", using: :btree
 
   create_table "project_repositories", force: true do |t|

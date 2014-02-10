@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -42,14 +39,23 @@ end
 # gem 'capistrano', group: :development
 
 # Use debugger
-gem 'debugger', group: [:development, :test]
 gem 'octokit', '~> 2.0'
 gem 'devise'
 gem 'omniauth-github'
-gem 'puma'
-gem 'pry-rails', group: [:development, :test]
 gem 'faraday-http-cache'
 gem 'simple_form'
 gem 'jquery-ui-rails'
 gem 'mysql2'
 gem 'bootstrap-sass'
+gem 'unicorn'
+group :development, :test do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'pry-rails'
+  gem 'debugger'
+  gem 'puma'
+  gem 'spring'
+  gem 'pry-byebug'
+  gem 'pry-coolline'
+end

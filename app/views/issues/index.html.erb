@@ -1,19 +1,30 @@
+<div class="milestone-selector">
+  <span>Select a milestone</span>
+  <select name="milestone-selector" id="milestone-selector">
+    <option value="all">All</option>
+    <% @milestones.each do |m| %>
+      <option value="<%= m.number %>"><%= m.title %></option>
+    <% end %>
+  </select>
+</div>
+
 <div class="gridster">
   <ul>
     <% col = 1 %>
     <% row = 1 %>
     <% @issues.each do |issue| %>
+      <% i = @issue_map[issue.id] %>
       <li class="portlet" data-sizex="1" data-sizey="1" data-col="<%= col %>" data-row="<%= row %>">
         <div class="portlet-header">
-          <span><%= issue.title %></span>
+          <span><%= i.title %></span>
           <div class="eightfoot-avatar">
-            <% if user =  @issue_map[issue.id].try(:assignee) %>
+            <% if user =  i.try(:assignee) %>
               <img height="100%" src="<%= user.rels[:avatar].href %>" />
             <% end %>
           </div>
         </div>
         <div class="portlet-content">
-          <a target="_blank" href="<%= issue.html_url %>">#<%= issue.number %></a>
+          <a target="_blank" href="<%= i.rels[:html].href %>">#<%= i.number %></a>
         </div>
         <% row = row + 1
            if row >= 5
