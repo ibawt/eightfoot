@@ -6,6 +6,7 @@ ul {
     background-color: lightblue;
     overflow-x: hidden;
     overflow-y: auto;
+    box-shadow: 1px 1px 0px rgba(0,0,0,0.5);
     &::-webkit-scrollbar {
         width:5px;
     }
@@ -21,11 +22,11 @@ ul {
     }
 }
 .portlet-content {
-    padding: 0.2em 0.3em;
+    padding: 0.5em;
 }
 .portlet-header {
     word-wrap: break-word;
-    padding: 0.2em 0.3em;
+    padding: 0.5em;
     position: relative;
     background-color: azure;
 }
