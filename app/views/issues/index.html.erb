@@ -16,12 +16,17 @@
       <% i = @issue_map[issue.id] %>
       <li class="portlet" data-sizex="1" data-sizey="1" data-col="<%= col %>" data-row="<%= row %>">
         <div class="portlet-header">
-          <span><%= i.title %></span>
-          <div class="eightfoot-avatar">
-            <% if user =  i.try(:assignee) %>
-              <img height="100%" src="<%= user.rels[:avatar].href %>" />
-            <% end %>
-          </div>
+          <span>
+            <a target="_blank" href="<%= i.rels[:html].href %>">
+              <%= i.title %>
+            </a>
+          </span>
+          <% if user =  i.try(:assignee) %>
+            <div>
+              <img class="eightfoot-avatar" src="<%= user.rels[:avatar].href %>" />
+              <p><%= user.nickname %></p>
+            </div>
+          <% end %>
         </div>
         <div class="portlet-content">
           <a target="_blank" href="<%= i.rels[:html].href %>">#<%= i.number %></a>
