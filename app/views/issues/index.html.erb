@@ -30,7 +30,7 @@
           <% end %>
         </div>
         <div class="portlet-content">
-          <%= i.body %>
+          <%= raw BlueCloth.new(i.body).to_html %>
         </div>
         <% row = row + 1
            if row >= 5
