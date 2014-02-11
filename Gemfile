@@ -48,6 +48,7 @@ gem 'jquery-ui-rails'
 gem 'mysql2'
 gem 'bootstrap-sass'
 gem 'unicorn'
+gem 'bluecloth'
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

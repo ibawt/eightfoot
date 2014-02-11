@@ -4,14 +4,42 @@ ul {
 .portlet {
     margin: 0 1em 0.3em 0;
     background-color: lightblue;
-    border: 3px solid black;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    &::-webkit-scrollbar {
+        width:5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background:rgba(0,0,0,0.5);
+
+        border-radius:5px;
+    }
+    .gs-resize-handle-both {
+        bottom: 0;
+        right: 0;
+        background-position: center center;
+    }
 }
 .portlet-content {
+    padding: 0.5em;
 }
 .portlet-header {
     word-wrap: break-word;
-    padding: 0.2em 0.3em;
-    margin-bottom: 0.5em;
+    padding: 0.5em;
     position: relative;
     background-color: azure;
+    &:before, &:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+}
+
+.milestone-selector {
+  margin-bottom: 1em;
+}
+
+.comments-link {
+    float: right;
 }

@@ -16,15 +16,27 @@
       <% i = @issue_map[issue.id] %>
       <li class="portlet" data-sizex="1" data-sizey="1" data-col="<%= col %>" data-row="<%= row %>">
         <div class="portlet-header">
-          <span><%= i.title %></span>
-          <div class="eightfoot-avatar">
-            <% if user =  i.try(:assignee) %>
-              <img height="100%" src="<%= user.rels[:avatar].href %>" />
+          <span>
+            <a target="_blank" href="<%= i.rels[:html].href %>">
+              <%= i.title %>
+            </a>
+            <% if i.comments.to_i > 0 %>
+            <a class="comments-link" target="_blank" href="<%= i.rels[:html].href %>">
+              <i class="fa fa-comments-o"></i>
+              <%= i.comments %>
+            </a>
             <% end %>
-          </div>
+          </span>
+          <% if user =  i.try(:assignee) %>
+            <div>
+              <a href="https://github.com/<%= user.login %>" title="<%= user.login %>" target="_blank">
+                <img class="eightfoot-avatar" src="<%= user.rels[:avatar].href %>" alt="<%= user.login %>"/>
+              </a>
+            </div>
+          <% end %>
         </div>
         <div class="portlet-content">
-          <a target="_blank" href="<%= i.rels[:html].href %>">#<%= i.number %></a>
+          <%= raw BlueCloth.new(i.body).to_html %>
         </div>
         <% row = row + 1
            if row >= 5

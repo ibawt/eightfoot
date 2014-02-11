@@ -15,9 +15,41 @@
 
 @import "bootstrap";
 
+
+// Cool
+$dark-background: #262626;
+$nav-link-color: #428bca;
+$nav-link-hover-color: #efefef;
+
+$header-height: 35px;
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+
+html, body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 .eightfoot-bg {
-    background-image:image_url("bg.jpg");
-    background-size: 100%;
+    background: url("bg.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.eightfoot-panel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+#main-panel {
+    padding-top: $header-height;
 }
 
 .eightfoot-title {
@@ -26,29 +58,31 @@
 }
 
 .eightfoot-navbar {
-    background-color: black;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    background-color: $dark-background;
+    width: 100%;
     min-height: 20px;
+    padding: 0;
+    margin: 0;
     border-radius: 0px;
     border: none;
+
+    color: $nav-link-color;
+    a:hover, a:visited:hover {
+        color: $nav-link-hover-color;
+        background-color: #000;
+        border-radius: 0;
     }
+}
 .eightfoot-avatar {
-    height: 35px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-right: 5px;
-    }
-.eightfoot-navbar-text {
-    color: white;
-    a {
-        color: #000;
-        &:visited {
-            color: #FFF;
-        }
-        &:hover {
-            color: #fff;
-            background-color: #000;
-        }
-    }
+    height: $header-height;
+    position: relative;
+}
+.eightfoot-body {
+    padding: 2em;
+    top: 0;
 }
 
 .eightfoot-description {
@@ -61,4 +95,9 @@
     bottom: 20px;
     right: 20px;
     width: 400px;
+}
+
+.gridster ul {
+    padding: 0;
+    margin: 0;
 }
