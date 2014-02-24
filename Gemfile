@@ -57,7 +57,6 @@ group :development, :test do
   gem 'debugger'
   gem 'puma'
   gem 'spring'
-  gem 'sqlite3'
   gem 'pry-byebug'
   gem 'pry-coolline'
 end
