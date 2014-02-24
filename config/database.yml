@@ -10,7 +10,7 @@ development:
   pool: 5
   username: root
   password:
-  port: 13306
+  port: <%= ENV.fetch('BOXEN_MYSQL_PORT', 3306).to_i %>
   host: 127.0.0.1
   socket: /tmp/mysql.sock
   timeout: 5000

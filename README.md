@@ -12,7 +12,7 @@ Setup
 4. Create an application on GitHub, make the URL and callback URL http://localhost:3000
 5. `export CLIENT_ID=#{the ID the application in step 4 made}`
 6. `export CLIENT_SECRET=#{the secret the application in step 4 made}`
-7. `bundle exec rails `
+7. `bundle exec rails s`
 8. Visit [http://localhost:3000](http://localhost:3000) and log in with your GitHub account credentials
 
 Try not testing it against any majorly sensitive repos right now!!
