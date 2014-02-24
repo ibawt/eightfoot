@@ -10,7 +10,7 @@ development:
   pool: 5
   username: root
   password:
-  port: 13306
+  port: <%= ENV.fetch('BOXEN_MYSQL_PORT', 3306).to_i %>
   host: 127.0.0.1
   socket: /tmp/mysql.sock
   timeout: 5000
@@ -19,13 +19,21 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
+  adapter: mysql2
+  database: eightfoot_test
+  username: root
+  password:
+  port: <%= ENV.fetch('BOXEN_MYSQL_PORT', 3306).to_i %>
+  encoding: utf8
   pool: 5
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql2
+  database: eightfoot
+  username: root
+  password:
+  port: <%= ENV.fetch('BOXEN_MYSQL_PORT', 3306).to_i %>
+  encoding: utf8
   pool: 5
   timeout: 5000
