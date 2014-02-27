@@ -3,6 +3,8 @@ eightfoot
 
 github issue tracker
 
+![Screenshot of eightfood](https://raw.github.com/ibawt/eightfoot/master/screenshot.png)
+
 Setup
 -----
 
