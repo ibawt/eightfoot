@@ -12,4 +12,14 @@ module IssuesHelper
   def pull_request_changes_url(pr_url)
     return "#{pr_url}/files"
   end
+
+  def render_issue_body(body, issue_url)
+    BlueCloth.new(
+      emojify(
+        referencify(
+          userlinkify(body), issue_url
+        )
+      )
+    ).to_html
+  end
 end
