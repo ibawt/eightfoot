@@ -9,10 +9,6 @@ $(document).on 'page:load ready page:fetch', ->
     avoid_overlapped_widgets: true
     resize: { enabled: true }
     draggable:
-      start: (event, ui) ->
-        event.preventDefault()
-        event.stopPropagation()
+      handle: '.portlet-header, .portlet-header .issue-title'
       stop: (event,ui) ->
-        event.preventDefault()
-        event.stopPropagation()
         $.post('update_position', $('.gridster ul').serialize())
