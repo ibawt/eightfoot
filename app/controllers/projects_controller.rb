@@ -22,6 +22,12 @@ class ProjectsController < ApplicationController
   end
 
   def update_position
+    if last_edit = LastEdit.last
+      if last_edit.user_id != current_user.id
+        render json: { refresh: true }, :status => :ok
+      end
+    end
+
     params[:issues].each_value do |issue|
       my_issue = Issue.find(issue['id'].to_i)
       coords = issue['coords']
@@ -31,7 +37,11 @@ class ProjectsController < ApplicationController
       my_issue.height = coords['size_y'].to_i
       my_issue.save
     end
-    render json: {}, :status => :ok
+
+    l = LastEdit.create(:user_id => current_user.id)
+    l.save
+    session[:last_edit] = l
+    render json: {last_edit: l}, :status => :ok
   end
 
   def add_repos
