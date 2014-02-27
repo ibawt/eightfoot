@@ -2,7 +2,7 @@ $(document).on 'page:load ready page:fetch', ->
   $('#milestone-selector').change ->
     window.location = "?milestone=#{encodeURI($(@).val())}"
 
-  $('.gridster ul').gridster
+  $('.gridster .gridster-data').gridster
     widget_margins: [5,5]
     widget_base_dimensions: [180,180]
     avoid_overlapped_widgets: true
