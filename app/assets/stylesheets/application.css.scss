@@ -54,6 +54,13 @@ blockquote {
     background-position: center;
     background-size: cover;
 }
+.eightfoot-icon {
+    background: url("octopus-inverse.svg");
+    background-size: cover;
+    width:40px;
+    height:35px;
+    display: inline-block;
+}
 .eightfoot-panel {
     position: relative;
     width: 100%;

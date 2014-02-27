@@ -38,6 +38,7 @@
   <body class="eightfoot-bg">
     <% if current_user %>
       <div class="navbar navbar-default eightfoot-navbar">
+        <a href="/" class="btn eightfoot-icon"></a>
         <a href="<%= projects_path %>" class="btn eightfoot-navbar-text">Projects</a>
         <a href="<%= destroy_user_session_path %>" class="btn eightfoot-navbar-text">Sign Out</a>
         <div class="eightfoot-avatar pull-right">
