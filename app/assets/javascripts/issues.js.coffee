@@ -34,7 +34,7 @@ $(document).on 'page:load ready page:fetch', ->
     for ele in portlets
       title = searchifyText($(ele).find(".issue-title").text().toLowerCase().trim())
 
-      if title.indexOf(value) == -1 and body.indexOf(value) == -1 # super simple, but works
+      if title.indexOf(value) == -1 # super simple, but works
         $(ele).addClass("no-match")
   , 100
 
