@@ -60,7 +60,7 @@
         </div>
         <% if !i.body.blank? %>
         <div class="portlet-content issue-body">
-          <%= raw BlueCloth.new(emojify(i.body)).to_html %>
+          <%= raw BlueCloth.new(emojify(userlinkify(i.body))).to_html %>
         </div>
         <% row = row + 1
            if row >= 5
