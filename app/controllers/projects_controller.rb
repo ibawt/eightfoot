@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
   end
 
   def update_position
+    binding.pry
     # params[:issue].each_with_index do |id,i|
     #   issue = Issue.find(id)
     #   issue.position = i
