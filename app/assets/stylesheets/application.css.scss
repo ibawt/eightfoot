@@ -68,6 +68,10 @@ blockquote {
     top: 0;
 }
 
+.btn-github:hover {
+    color: white;
+}
+
 #main-panel {
     padding-top: $header-height;
 }
@@ -90,14 +94,16 @@ blockquote {
     border: none;
 
     color: $nav-link-color;
-    a:hover, a:visited:hover {
+    a.btn:hover, a.btn:visited:hover {
         color: $nav-link-hover-color;
         background-color: #000;
         border-radius: 0;
     }
 }
 .eightfoot-avatar {
+    cursor: pointer;
     height: $header-height;
+    width: $header-height;
     position: relative;
 }
 .eightfoot-body {
