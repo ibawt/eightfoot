@@ -52,6 +52,7 @@ gem 'mysql2'
 gem 'bootstrap-sass'
 gem 'unicorn'
 gem 'bluecloth'
+gem 'gemoji'
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
