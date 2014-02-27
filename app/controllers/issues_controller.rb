@@ -20,14 +20,15 @@ class IssuesController < ApplicationController
   end
 
   def update_issue_map(issues,repo)
-    issues.each do |issue|
-      i = Issue.find_or_create_by(:gh_id => issue.id)
-      i.project = @project
-      i.repository = repo
-      i.save if i.changed?
-
-      @issue_map[i.id] = issue
-    end
+    existing_issues = Issue.where(gh_id: issues.collect(&:id))
+    unsaved_issues = issues.select {|incoming| (existing_issues.detect {|existing| existing.gh_id==incoming.id}).nil?}
+    unsaved_issues.map! {|unsaved| unsaved = Issue.new(gh_id: unsaved.id, project: @project, repository: repo)}
+    Issue.import(unsaved_issues)
+    existing_issues = Issue.where(gh_id: issues.collect(&:id))
+    issues.each { |issue|
+      found_issue = existing_issues.detect{|e| e.gh_id== issue.id}
+      @issue_map[found_issue.id]=issue
+    }
   end
 
   def get_milestones
