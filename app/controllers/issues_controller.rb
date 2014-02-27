@@ -4,18 +4,14 @@ class IssuesController < ApplicationController
 
   before_action :get_milestones
 
+  MAX_ISSUES_PER_PROJECT = 50
+
   def index
     # this is kind of ugly but it works
     @issue_map = {}
     @project.repositories.each do |repo|
-      # TODO do this in batches
-      if params[:milestone]
-        update_issue_map @client.list_issues(repo.slug, milestone: params[:milestone]),repo
-      else
-        update_issue_map @client.list_issues(repo.slug),repo
-      end
+      update_issue_map(all_issues(repo, find_milestone),repo)
     end
-
     @issues = @project.issues.where( :gh_id => @issue_map.values.collect(&:id) )
   end
 
@@ -75,7 +71,6 @@ class IssuesController < ApplicationController
     @project = Project.find(params[:project_id])
   end
 
-
   # Use callbacks to share common setup or constraints between actions.
   def set_issue
     @issue = Issue.find(params[:id])
@@ -84,5 +79,25 @@ class IssuesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def issue_params
     params[:issue]
+  end
+
+  private
+
+  def all_issues(repo, milestone = nil)
+    opts = { per_page: 100 }
+    opts[:milestone] = milestone if milestone
+    issues = @client.list_issues(repo.slug, opts)
+    max=0
+    while max < MAX_ISSUES_PER_PROJECT/opts[:per_page] && (rels = @client.last_response.rels[:next]).nil? do
+      issues +=  rels.get.data
+      max += 1
+    end
+    issues
+  end
+
+  def find_milestone
+    milestones = get_milestones.collect(&:number)
+    milestone = params[:milestone] if params[:milestone] && milestones.include?(params[:milestone].to_i)
+    milestone
   end
 end
