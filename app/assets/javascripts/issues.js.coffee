@@ -7,7 +7,7 @@ $(document).on 'page:load ready page:fetch', ->
     widget_margins: [5,2]
     widget_base_dimensions: [250,70]
     avoid_overlapped_widgets: true
-    resize: { enabled: true }
+    resize: { enabled: false }
     serialize_params: ($elem, coords) ->
       { id: $elem[0].id, coords: {
         col: coords.col,
@@ -17,7 +17,6 @@ $(document).on 'page:load ready page:fetch', ->
         }
       }
     draggable:
-      handle: '.portlet-header, .portlet-header .issue-title'
       stop: (event,ui) ->
         data = issues: $('.gridster ul').gridster().data('gridster').serialize()
         $.post('update_position', data).done (data) ->
@@ -34,7 +33,6 @@ $(document).on 'page:load ready page:fetch', ->
     portlets.removeClass("no-match")
     for ele in portlets
       title = searchifyText($(ele).find(".issue-title").text().toLowerCase().trim())
-      body  = searchifyText($(ele).find(".issue-body").text().toLowerCase().trim())
 
       if title.indexOf(value) == -1 and body.indexOf(value) == -1 # super simple, but works
         $(ele).addClass("no-match")
