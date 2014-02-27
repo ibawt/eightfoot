@@ -44,6 +44,7 @@
             </div>
           <% end %>
         </div>
+        <% if !i.body.blank? %>
         <div class="portlet-content">
           <%= raw BlueCloth.new(i.body).to_html %>
         </div>
@@ -53,6 +54,7 @@
              row = 1
            end
            %>
+        <% end %>
       </li>
     <% end %>
   </ul>
