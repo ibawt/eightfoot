@@ -10,11 +10,11 @@
   <span>Select a milestone</span>
   <select name="milestone-selector" id="milestone-selector">
     <option value="all">All</option>
-    <% @milestones.each do |m| %>
-      <% if params[:milestone] == m.title %>
-      <option value="<%= m.number %>" selected="selected"><%= m.title %></option>
+    <% @milestones.each do |title| %>
+      <% if params[:milestone] == title %>
+      <option value="<%= title %>" selected="selected"><%= title %></option>
       <% else %>
-      <option value="<%= m.title %>"><%= m.title %></option>
+      <option value="<%= title %>"><%= title %></option>
       <% end %>
     <% end %>
   </select>

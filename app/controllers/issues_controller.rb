@@ -32,6 +32,7 @@ class IssuesController < ApplicationController
     @milestones = @project.repositories.reduce([]) do |acc, repo|
       acc + @client.get("/repos/#{repo.slug}/milestones")
     end
+    @milestones = @milestones.collect(&:title).to_set
   end
 
   # GET /issues/1
