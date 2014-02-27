@@ -13,7 +13,7 @@ class IssuesController < ApplicationController
       milestone = find_milestone(repo) if milestone_filtered?
       update_issue_map(all_issues(repo, milestone),repo) if !milestone_filtered? || milestone
     end
-    @issues = @project.issues.where( :gh_id => @issue_map.values.collect(&:id) )
+    @issues = @project.issues.where( :gh_id => @issue_map.values.collect {| each | each[:issue].id} )
   end
 
   def update_issue_map(issues,repo)
@@ -24,7 +24,7 @@ class IssuesController < ApplicationController
     existing_issues = Issue.where(gh_id: issues.collect(&:id))
     issues.each { |issue|
       found_issue = existing_issues.detect{|e| e.gh_id== issue.id}
-      @issue_map[found_issue.id]=issue
+      @issue_map[found_issue.id]={ issue: issue, repo: repo }
     }
   end
 
