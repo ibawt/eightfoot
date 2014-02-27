@@ -59,9 +59,10 @@ class ProjectsController < ApplicationController
   end
 
   def add_repos
-    gh_repo = @client.get("repos/#{params[:slug]}") if params[:slug]
+    repo_params = params.require(:repository).permit(:slug)
+    gh_repo = @client.get("repos/#{repo_params[:slug]}") if repo_params[:slug]
     if gh_repo
-      @repo = Repository.create(params.require(:repository).permit(:slug))
+      @repo = Repository.create(repo_params)
       @repo.save if gh_repo
     else
       flash[:error] = "No such repo #{params[:slug]}" unless gh_repo
