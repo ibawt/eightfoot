@@ -14,6 +14,12 @@
       <li><%= repo.name %></li>
     <% end %>
   </ul>
+  <p>Labels:</p>
+  <ul>
+    <% @project.labels.each do |label| %>
+      <li><%= label.name %></li>
+    <% end %>
+  </ul>
 
 </p>
 

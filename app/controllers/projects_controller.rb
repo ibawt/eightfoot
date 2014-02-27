@@ -66,6 +66,7 @@ class ProjectsController < ApplicationController
     end
 
     @repos = Repository.all
+    binding.pry
   end
 
   # POST /projects

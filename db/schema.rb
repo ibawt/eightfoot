@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227163741) do
+ActiveRecord::Schema.define(version: 20140227174945) do
 
   create_table "issues", force: true do |t|
     t.integer "repository_id"
@@ -27,8 +27,21 @@ ActiveRecord::Schema.define(version: 20140227163741) do
   add_index "issues", ["project_id"], name: "index_issues_on_project_id_and_position", using: :btree
   add_index "issues", ["repository_id"], name: "index_issues_on_repository_id", using: :btree
 
+  create_table "labels", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "last_edits", force: true do |t|
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_labels", force: true do |t|
+    t.integer  "label_id"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
