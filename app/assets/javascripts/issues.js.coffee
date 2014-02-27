@@ -19,4 +19,6 @@ $(document).on 'page:load ready page:fetch', ->
       handle: '.portlet-header, .portlet-header .issue-title'
       stop: (event,ui) ->
         data = issues: $('.gridster ul').gridster().data('gridster').serialize()
-        $.post('update_position', data)
+        $.post('update_position', data).done (data) ->
+          if data.refresh
+            location.reload()
