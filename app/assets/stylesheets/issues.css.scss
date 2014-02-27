@@ -51,7 +51,18 @@
 }
 
 .issue-label-container {
+  cursor: pointer;
   display: flex;
+  &.expanded {
+    .issue-label {
+      height: auto;
+      text-indent: 0;
+      color: white;
+      font-size: 0.8em;
+      text-shadow: 1px 1px 0px black;
+      padding-left: 1em;
+    }
+  }
 }
 .issue-label {
   flex: 1 auto;

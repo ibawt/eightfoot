@@ -40,3 +40,6 @@ $(document).on 'page:load ready page:fetch', ->
   , 100
 
   $("#local-filter").on 'keyup', localSearch
+
+  $(".issue-label-container").on "click", (ev) ->
+    $(ev.currentTarget).toggleClass("expanded")
