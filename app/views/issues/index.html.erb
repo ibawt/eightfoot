@@ -8,10 +8,10 @@
   <select name="milestone-selector" id="milestone-selector">
     <option value="all">All</option>
     <% @milestones.each do |m| %>
-      <% if params[:milestone].to_i == m.number.to_i %>
+      <% if params[:milestone] == m.title %>
       <option value="<%= m.number %>" selected="selected"><%= m.title %></option>
       <% else %>
-      <option value="<%= m.number %>"><%= m.title %></option>
+      <option value="<%= m.title %>"><%= m.title %></option>
       <% end %>
     <% end %>
   </select>
