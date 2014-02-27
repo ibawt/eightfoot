@@ -1,0 +1,8 @@
+<h1>Add some labels</h1>
+<p> Select some labels to filter by</p>
+<ul>
+  <%= simple_form_for @project do |f| %>
+    <%= f.association :labels, :label_method => :name, :as => :check_boxes, :multiple => true %>
+    <%= f.button :submit, "Submit" %>
+  <% end %>
+</ul>
