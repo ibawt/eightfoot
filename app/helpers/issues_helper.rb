@@ -16,8 +16,10 @@ module IssuesHelper
   def render_issue_body(body, issue_url)
     BlueCloth.new(
       emojify(
-        referencify(
-          userlinkify(body), issue_url
+        userlinkify(
+          referencify(
+            body, issue_url
+          )
         )
       )
     ).to_html
