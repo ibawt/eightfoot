@@ -1,6 +1,8 @@
-<h1>Listing projects</h1>
+<h1>Team Projects</h1>
 
-<table>
+<%= link_to 'New Project', new_project_path %>
+
+<table class="tablelist">
   <thead>
     <tr>
       <th>Name</th>
@@ -13,9 +15,7 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.name %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to project.name, project_issues_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -24,4 +24,3 @@
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>

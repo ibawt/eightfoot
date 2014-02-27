@@ -1,0 +1,26 @@
+
+/***
+tablelist module
+*/
+
+
+table {
+    width:100%;
+}
+
+.tablelist {
+  margin-top: 40px;
+}
+
+.tablelist th { 
+  background-color:#222;
+  color:#FFF;
+}
+
+.tablelist tbody tr:hover {
+  background-color:#ECF4FA
+}
+
+.tablelist td, .tablelist th { 
+  padding: 2px 10px; 
+}

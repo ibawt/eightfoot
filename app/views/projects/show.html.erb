@@ -1,19 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
+<h1>Team Project: <%= @project.name %> </h1>
 
-  <p>Repositories:</p>
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Add Repos', show_repos_project_path(@project) %> |
+<%= link_to 'Issue Manager', project_issues_path(@project) %>
+
+
+<h2>Repos in this project</h2>
   <ul>
     <% @project.repositories.each do |repo| %>
       <li><%= repo.name %></li>
     <% end %>
   </ul>
 
-  <%= link_to 'Add Repos', show_repos_project_path(@project) %>
-  <%= link_to 'Issue Manager', project_issues_path(@project) %>
 </p>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
