@@ -4,7 +4,7 @@ class IssuesController < ApplicationController
 
   before_action :get_milestones
 
-  MAX_ISSUES_PER_PROJECT = 50
+  MAX_ISSUES_PER_PROJECT = 100
 
   def index
     # this is kind of ugly but it works
@@ -94,17 +94,15 @@ class IssuesController < ApplicationController
     opts[:labels] = @project.labels.collect(&:name).join(',')
     opts[:milestone] = milestone if milestone
     issues = @client.list_issues(repo.slug, opts)
-    max=0
-    while max < MAX_ISSUES_PER_PROJECT/opts[:per_page] && (rels = @client.last_response.rels[:next]).nil? do
+    while issues.size < MAX_ISSUES_PER_PROJECT && !(rels = @client.last_response.rels[:next]).nil? do
       issues +=  rels.get.data
-      max += 1
     end
     issues
   end
 
   def find_milestone(repo)
-    milestones = @client.get("/repos/#{repo.slug}/milestones").collect(&:number)
-    milestone = params[:milestone] if params[:milestone] && milestones.include?(params[:milestone].to_i)
-    milestone
+    milestones = @client.get("/repos/#{repo.slug}/milestones") if milestone_filtered?
+    milestone = milestones.detect{ |milestone| milestone.title == params[:milestone] } if milestone_filtered?
+    milestone.number if milestone
   end
 end
