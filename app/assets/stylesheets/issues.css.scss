@@ -17,6 +17,10 @@
         right: 0;
         background-position: center center;
     }
+    transition: opacity 0.25s ease-in-out;
+    &.no-match {
+        opacity: 0.35;
+    }
 }
 .portlet-content {
     padding: 0.5em;

@@ -15,6 +15,9 @@
       <% end %>
     <% end %>
   </select>
+
+  <label for="local-filter">Filter</span>
+  <input type="text" id="local-filter">
 </div>
 
 <% if @issues.size > 0 %>
@@ -56,7 +59,7 @@
           <% end %>
         </div>
         <% if !i.body.blank? %>
-        <div class="portlet-content">
+        <div class="portlet-content issue-body">
           <%= raw BlueCloth.new(i.body).to_html %>
         </div>
         <% row = row + 1
