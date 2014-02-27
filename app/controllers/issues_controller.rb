@@ -10,7 +10,8 @@ class IssuesController < ApplicationController
     # this is kind of ugly but it works
     @issue_map = {}
     @project.repositories.each do |repo|
-      update_issue_map(all_issues(repo, find_milestone),repo)
+      milestone = find_milestone(repo) if milestone_filtered?
+      update_issue_map(all_issues(repo, milestone),repo) if !milestone_filtered? || milestone
     end
     @issues = @project.issues.where( :gh_id => @issue_map.values.collect(&:id) )
   end
@@ -83,6 +84,11 @@ class IssuesController < ApplicationController
 
   private
 
+  def milestone_filtered?
+    !(params[:milestone].nil? || params[:milestone] == "all")
+  end
+
+
   def all_issues(repo, milestone = nil)
     opts = { per_page: 100 }
     opts[:labels] = @project.labels.collect(&:name).join(',')
@@ -96,8 +102,8 @@ class IssuesController < ApplicationController
     issues
   end
 
-  def find_milestone
-    milestones = get_milestones.collect(&:number)
+  def find_milestone(repo)
+    milestones = @client.get("/repos/#{repo.slug}/milestones").collect(&:number)
     milestone = params[:milestone] if params[:milestone] && milestones.include?(params[:milestone].to_i)
     milestone
   end
