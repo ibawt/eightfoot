@@ -8,13 +8,18 @@
   <select name="milestone-selector" id="milestone-selector">
     <option value="all">All</option>
     <% @milestones.each do |m| %>
+      <% if params[:milestone].to_i == m.number.to_i %>
+      <option value="<%= m.number %>" selected="selected"><%= m.title %></option>
+      <% else %>
       <option value="<%= m.number %>"><%= m.title %></option>
+      <% end %>
     <% end %>
   </select>
 </div>
 
+<% if @issues.size > 0 %>
 <div class="gridster">
-  <ul>
+  <ul class="gridster-data">
     <% col = 1 %>
     <% row = 1 %>
     <% @issues.each do |issue| %>
@@ -22,6 +27,11 @@
       <li class="portlet" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>">
         <div class="portlet-header">
           <span>
+            <% if pr_url = pull_request_url(i) %>
+            <a href="<%= pull_request_changes_url(pr_url) %>" target="_blank">
+              <i class="fa fa-code-fork"></i>
+            </a>
+            <% end %>
             <span class="issue-title">
               <%= i.title %>
             </span>
@@ -45,6 +55,7 @@
             </div>
           <% end %>
         </div>
+        <% if !i.body.blank? %>
         <div class="portlet-content">
           <%= raw BlueCloth.new(i.body).to_html %>
         </div>
@@ -54,7 +65,11 @@
              row = 1
            end
            %>
+        <% end %>
       </li>
     <% end %>
   </ul>
 </div>
+<% else %>
+<p>No issues to display! Good job :)</p>
+<% end %>

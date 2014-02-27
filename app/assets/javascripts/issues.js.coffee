@@ -3,6 +3,7 @@ $(document).on 'page:load ready page:fetch', ->
     window.location = "?milestone=#{encodeURI($(@).val())}"
 
   $('.gridster ul').gridster
+    widget_selector: '.portlet'
     widget_margins: [5,5]
     widget_base_dimensions: [180,180]
     avoid_overlapped_widgets: true
@@ -19,4 +20,6 @@ $(document).on 'page:load ready page:fetch', ->
       handle: '.portlet-header, .portlet-header .issue-title'
       stop: (event,ui) ->
         data = issues: $('.gridster ul').gridster().data('gridster').serialize()
-        $.post('update_position', data)
+        $.post('update_position', data).done (data) ->
+          if data.refresh
+            location.reload()
