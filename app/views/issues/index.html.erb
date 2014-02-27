@@ -17,9 +17,14 @@
       <li class="portlet" id="<%= issue.id %>" data-sizex="1" data-sizey="1" data-col="<%= col %>" data-row="<%= row %>">
         <div class="portlet-header">
           <span>
-            <a target="_blank" href="<%= i.rels[:html].href %>">
+            <span class="issue-title">
               <%= i.title %>
-            </a>
+            </span>
+            <span class="issue-link">
+              <a target="_blank" href="<%= i.rels[:html].href %>">
+                <i class="fa fa-external-link"></i>
+              </a>
+            </span>
             <% if i.comments.to_i > 0 %>
             <a class="comments-link" target="_blank" href="<%= i.rels[:html].href %>">
               <i class="fa fa-comments-o"></i>
