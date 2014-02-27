@@ -28,16 +28,18 @@
     <% @issues.each do |issue| %>
       <% i = @issue_map[issue.id] %>
       <li class="portlet" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>">
+       <% i.labels.each do |label| %>
+         <div class="issue-label" title="<%=label.name%>" style="background-color:#<%=label.color%>"><%=label.name%></div>
+       <% end %>
         <div class="portlet-header">
+          <% if user =  i.try(:assignee) %>
+            <div class="issue-assignee">
+              <a href="https://github.com/<%= user.login %>" title="<%= user.login %>" target="_blank">
+                <img class="eightfoot-avatar" src="<%= user.rels[:avatar].href %>" alt="<%= user.login %>"/>
+              </a>
+            </div>
+          <% end %>
           <span>
-            <% if pr_url = pull_request_url(i) %>
-            <a href="<%= pull_request_changes_url(pr_url) %>" target="_blank">
-              <i class="fa fa-code-fork"></i>
-            </a>
-            <% end %>
-            <span class="issue-title">
-              <%= i.title %>
-            </span>
             <span class="issue-link">
               <a target="_blank" href="<%= i.rels[:html].href %>">
                 <i class="fa fa-external-link"></i>
@@ -49,19 +51,17 @@
               <%= i.comments %>
             </a>
             <% end %>
+            <% if pr_url = pull_request_url(i) %>
+            <a href="<%= pull_request_changes_url(pr_url) %>" target="_blank">
+              <i class="fa fa-code-fork"></i>
+            </a>
+            <% end %>
+            <span class="issue-title">
+              <%= i.title %>
+            </span>
           </span>
-          <% if user =  i.try(:assignee) %>
-            <div>
-              <a href="https://github.com/<%= user.login %>" title="<%= user.login %>" target="_blank">
-                <img class="eightfoot-avatar" src="<%= user.rels[:avatar].href %>" alt="<%= user.login %>"/>
-              </a>
-            </div>
-          <% end %>
         </div>
         <% if !i.body.blank? %>
-        <div class="portlet-content issue-body">
-          <%= raw BlueCloth.new(emojify(i.body)).to_html %>
-        </div>
         <% row = row + 1
            if row >= 5
              col = col + 1

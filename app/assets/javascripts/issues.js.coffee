@@ -4,8 +4,8 @@ $(document).on 'page:load ready page:fetch', ->
 
   $('.gridster ul').gridster
     widget_selector: '.portlet'
-    widget_margins: [5,5]
-    widget_base_dimensions: [180,180]
+    widget_margins: [5,2]
+    widget_base_dimensions: [250,70]
     avoid_overlapped_widgets: true
     resize: { enabled: true }
     serialize_params: ($elem, coords) ->
