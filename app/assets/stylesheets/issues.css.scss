@@ -2,7 +2,7 @@
     margin: 0 1em 0.3em 0;
     background-color: #e4eff7;
     font-size: 12px;
-    border:1px solid #222;
+    border:0;
     overflow-x: hidden;
     overflow-y: auto;
     &::-webkit-scrollbar {
@@ -50,9 +50,14 @@
   margin-left: 3px;
 }
 
-.issue-label { 
-  overflow:hidden; 
-  height: 2px;
+.issue-label-container {
+  display: flex;
+}
+.issue-label {
+  flex: 1 auto;
+  overflow:hidden;
+  height: 3px;
+  border-right: 2px solid white;
   text-indent: -999em;
 }
 

@@ -28,9 +28,11 @@
     <% @issues.each do |issue| %>
       <% i = @issue_map[issue.id] %>
       <li class="portlet" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>">
-       <% i.labels.each do |label| %>
-         <div class="issue-label" title="<%=label.name%>" style="background-color:#<%=label.color%>"><%=label.name%></div>
-       <% end %>
+        <div class="issue-label-container">
+          <% i.labels.each do |label| %>
+            <div class="issue-label" title="<%=label.name%>" style="background-color:#<%=label.color%>;"><%=label.name%></div>
+          <% end %>
+        </div>
         <div class="portlet-header">
           <% if user =  i.try(:assignee) %>
             <div class="issue-assignee">
