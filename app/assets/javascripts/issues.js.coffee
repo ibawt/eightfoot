@@ -23,3 +23,21 @@ $(document).on 'page:load ready page:fetch', ->
         $.post('update_position', data).done (data) ->
           if data.refresh
             location.reload()
+
+  searchifyText = (str) ->
+    str.toLowerCase().trim()
+
+  localSearch = _.throttle (ev) ->
+    value = searchifyText($(ev.currentTarget).val())
+    portlets = $(".portlet") # may be able to memoize this outside if we're not adding new issues dynamically
+
+    portlets.removeClass("no-match")
+    for ele in portlets
+      title = searchifyText($(ele).find(".issue-title").text().toLowerCase().trim())
+      body  = searchifyText($(ele).find(".issue-body").text().toLowerCase().trim())
+
+      if title.indexOf(value) == -1 and body.indexOf(value) == -1 # super simple, but works
+        $(ele).addClass("no-match")
+  , 100
+
+  $("#local-filter").on 'keyup', localSearch
