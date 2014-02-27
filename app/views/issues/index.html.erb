@@ -28,9 +28,12 @@
   <ul class="gridster-data">
     <% col = 1 %>
     <% row = 1 %>
-    <% @issues.each do |issue| %>
-      <% i = @issue_map[issue.id] %>
-      <li class="portlet" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>" data-labels="<%= i.labels.collect(&:name).join(',') %>">
+    <% @issues.each do |issue|%>
+      <% hash = @issue_map[issue.id]
+         i = hash[:issue]
+         repo = hash[:repo]
+       %>
+      <li class="portlet issue-repo-<%=repo.id% 10%>" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>" data-labels="<%= i.labels.collect(&:name).join(',') %>">
         <div class="issue-label-container">
           <% i.labels.each do |label| %>
             <div class="issue-label" title="<%=label.name%>" style="background-color:#<%=label.color%>;"><%=label.name%></div>
