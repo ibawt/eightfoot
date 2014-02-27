@@ -36,6 +36,18 @@ html, body {
     height: 100%;
 }
 
+ul {
+    list-style-type: disc;
+}
+ul, ol {
+    margin: 0 0 10px 2em;
+    padding: 0;
+}
+blockquote {
+    font-size: 1em;
+    border-left: 5px solid rgba(255,255,255,0.5);
+}
+
 .eightfoot-bg {
     background: url("Octopus.svg");
     background-position: center;
@@ -97,7 +109,8 @@ html, body {
     width: 400px;
 }
 
-.gridster ul {
+.gridster .gridster-data {
     padding: 0;
     margin: 0;
+    list-style-type: none;
 }
