@@ -85,6 +85,7 @@ class IssuesController < ApplicationController
 
   def all_issues(repo, milestone = nil)
     opts = { per_page: 100 }
+    opts[:labels] = @project.labels.collect(&:name).join(',')
     opts[:milestone] = milestone if milestone
     issues = @client.list_issues(repo.slug, opts)
     max=0

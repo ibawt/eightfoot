@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_repos, :update_position]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_repos, :update_position, :add_labels]
 
   # GET /projects
   # GET /projects.json
@@ -19,6 +19,20 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+  end
+
+  def add_labels
+    @labels = []
+    @project.repositories.each do |repo|
+      repo_labels = @client.get("repos/#{repo.slug}/labels")
+      @labels.concat repo_labels
+      repo_labels.each do |r|
+        l = Label.find_or_create_by(:name => r.name)
+        l.save if l.changed?
+      end
+    end
+
+    @labels = Label.all
   end
 
   def update_position
@@ -114,6 +128,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :repository_ids => [])
+    params.require(:project).permit(:name, :repository_ids => [],
+                                    :label_ids => [])
   end
 end

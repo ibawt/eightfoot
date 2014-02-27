@@ -1,11 +1,12 @@
-<% @page_title = @project.name %> 
+<% @page_title = @project.name %>
 
 <p id="notice"><%= notice %></p>
 
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Add Repos', show_repos_project_path(@project) %> |
-<%= link_to 'Issue Manager', project_issues_path(@project) %>
+<%= link_to 'Issue Manager', project_issues_path(@project) %> |
+<%= link_to 'Add Labels', add_labels_project_path(@project) %>
 
 
 <h2>Repos in this project</h2>
@@ -14,6 +15,10 @@
       <li><%= repo.name %></li>
     <% end %>
   </ul>
-
+  <p>Labels:</p>
+  <ul>
+    <% @project.labels.each do |label| %>
+      <li><%= label.name %></li>
+    <% end %>
+  </ul>
 </p>
-
