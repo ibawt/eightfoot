@@ -21,6 +21,11 @@
       <li class="portlet" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>">
         <div class="portlet-header">
           <span>
+            <% if pr_url = pull_request_url(i) %>
+            <a href="<%= pull_request_changes_url(pr_url) %>" target="_blank">
+              <i class="fa fa-code-fork"></i>
+            </a>
+            <% end %>
             <span class="issue-title">
               <%= i.title %>
             </span>
