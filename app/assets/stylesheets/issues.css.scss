@@ -1,9 +1,10 @@
 .portlet {
     margin: 0 1em 0.3em 0;
-    background-color: lightblue;
+    background-color: #e4eff7;
+    font-size: 12px;
+    border:1px solid #222;
     overflow-x: hidden;
     overflow-y: auto;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     &::-webkit-scrollbar {
         width:5px;
     }
@@ -29,7 +30,6 @@
     word-wrap: break-word;
     padding: 0.5em;
     position: relative;
-    background-color: azure;
     &:before, &:after {
         content: " ";
         display: table;
@@ -46,5 +46,29 @@
 }
 
 .comments-link {
-    float: right;
+  float: right;
+  margin-left: 3px;
+}
+
+.issue-label { 
+  overflow:hidden; 
+  height: 2px;
+  text-indent: -999em;
+}
+
+.fa-code-fork {
+  float:right;
+  margin-left: 3px;
+}
+
+.issue-link {
+  float:right;
+  margin-left: 3px;
+}
+
+.issue-assignee {
+  float:left;
+  vertical-align: middle;
+  margin: 0 3px 3px 0;
+  border: 1px solid #999;
 }
