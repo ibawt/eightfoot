@@ -1,6 +1,7 @@
 <% @page_title =  'Add Repo to ' + @project.name %>
 <p>
 <%= link_to('Project Summary', @project) %>
+
 <div>
   <p id="notice"><%= notice %></p>
   <p>Select some repos to add to <strong><%= @project.name %></strong></p>
@@ -8,7 +9,9 @@
     <%= f.association :repositories, label_method: :slug,as: :check_boxes, multiple: true %>
     <%= f.button :submit, "Submit" %>
   <% end %>
-
+   <% if flash[:error] -%>
+    <p class='error'><%=h flash[:error] %></p>
+  <% end -%>
   <%= simple_form_for :repository, { url: 'add_repos' } do |f| %>
     <%= f.input :slug, label: false %>
     <%= f.button :submit, "Add Repos" %>
