@@ -1,7 +1,10 @@
 <% @page_title = @project.name %>
 <p>
 <%= link_to 'Project Summary', @project %>
-
+<% if @project.labels.any? %>
+  <span>Project Global Labels:</span>
+  <%= @project.labels.collect(&:name).join(',') %>
+<% end %>
 </p>
 <div class="milestone-selector">
   <span>Select a milestone</span>
@@ -27,7 +30,7 @@
     <% row = 1 %>
     <% @issues.each do |issue| %>
       <% i = @issue_map[issue.id] %>
-      <li class="portlet" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>">
+      <li class="portlet" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>" data-labels="<%= i.labels.collect(&:name).join(',') %>">
         <div class="issue-label-container">
           <% i.labels.each do |label| %>
             <div class="issue-label" title="<%=label.name%>" style="background-color:#<%=label.color%>;"><%=label.name%></div>
