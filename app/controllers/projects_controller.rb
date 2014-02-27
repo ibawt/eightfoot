@@ -22,12 +22,15 @@ class ProjectsController < ApplicationController
   end
 
   def update_position
-    binding.pry
-    # params[:issue].each_with_index do |id,i|
-    #   issue = Issue.find(id)
-    #   issue.position = i
-    #   issue.save
-    # end
+    params[:issues].each_value do |issue|
+      my_issue = Issue.find(issue['id'].to_i)
+      coords = issue['coords']
+      my_issue.row = coords['row'].to_i
+      my_issue.col = coords['col'].to_i
+      my_issue.width = coords['size_x'].to_i
+      my_issue.height = coords['size_y'].to_i
+      my_issue.save
+    end
     render json: {}, :status => :ok
   end
 

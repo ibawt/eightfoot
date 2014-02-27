@@ -14,7 +14,7 @@
     <% row = 1 %>
     <% @issues.each do |issue| %>
       <% i = @issue_map[issue.id] %>
-      <li class="portlet" id="<%= issue.id %>" data-sizex="1" data-sizey="1" data-col="<%= col %>" data-row="<%= row %>">
+      <li class="portlet" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>">
         <div class="portlet-header">
           <span>
             <span class="issue-title">
