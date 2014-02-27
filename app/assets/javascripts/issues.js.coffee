@@ -33,9 +33,11 @@ $(document).on 'page:load ready page:fetch', ->
     portlets.removeClass("no-match")
     for ele in portlets
       title = searchifyText($(ele).find(".issue-title").text().toLowerCase().trim())
-      body  = searchifyText($(ele).find(".issue-body").text().toLowerCase().trim())
       labels = searchifyText($(ele).data().labels)
-      if title.indexOf(value) == -1 and body.indexOf(value) == -1 and labels.indexOf(value) == -1 # super simple, but works
+      author = $(ele).find(".issue-assignee").data("username") || ""
+      author = searchifyText(author)
+
+      if title.indexOf(value) == -1 and labels.indexOf(value) == -1 and author.indexOf(value) == -1  # super simple, but works
         $(ele).addClass("no-match")
   , 100
 
