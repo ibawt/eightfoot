@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   has_many :issues
 
   def column_headers
-    YAML::load(headers || '')
+    result = YAML::load(headers || '')
+    result ? result : {}
   end
 end
