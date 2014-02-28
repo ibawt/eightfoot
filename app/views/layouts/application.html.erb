@@ -35,7 +35,7 @@
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
   </head>
-  <body class="eightfoot-bg">
+  <body class="eightfoot-bg <%= controller_name %>-<%= action_name %>">
     <% if current_user %>
       <div class="navbar navbar-default eightfoot-navbar">
         <a href="/" class="btn eightfoot-icon"></a>

@@ -59,6 +59,11 @@ blockquote {
     background-position: center;
     background-size: cover;
 }
+.sessions-new.eightfoot-bg {
+    background: url("octopus-dark.svg");
+    background-position: center;
+    background-size: cover;
+}
 .eightfoot-icon {
     background: url("octopus-inverse.svg");
     background-size: cover;
@@ -82,8 +87,12 @@ blockquote {
 }
 
 .eightfoot-title {
-    font-size: 200px;
+    font-size:15em;
     margin-top: -20px;
+}
+
+.eightfoot-title, .eightfoot-description {
+    font-family: "HelveticaNeue-UltraLight", "Helvetica Neue UltraLight", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
 }
 
 .eightfoot-navbar {
@@ -117,10 +126,10 @@ blockquote {
 }
 
 .eightfoot-description {
-    font-size: 20px;
+    font-size: 3em;
     padding-top: 25px;
     padding-left: 40px;
-    }
+}
 .github-button {
     position: absolute;
     bottom: 20px;
@@ -142,7 +151,17 @@ blockquote {
   font-size: 32px;
   color: #FFF;
   text-transform:uppercase;
-   font-family: "HelveticaNeue-UltraLight", "Helvetica Neue UltraLight", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-family: "HelveticaNeue-UltraLight", "Helvetica Neue UltraLight", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
    font-weight: 100;
    letter-spacing:2px;
+}
+
+.github-button {
+  a.btn {
+    font-size: 1.5em;
+  }
+  .fa.fa-github {
+    line-height: 1.25em;
+    width: 1.5em;
+  }
 }
