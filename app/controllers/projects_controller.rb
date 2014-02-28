@@ -73,6 +73,14 @@ class ProjectsController < ApplicationController
     redirect_to show_repos_project_path
   end
 
+  def search_repos
+    results = @client.get("/search/repositories?q=#{params[:term]}")
+    names = results.items.collect(&:full_name)
+    respond_to do | format|
+      format.json { render json: names }
+    end
+  end
+
   def show_repos
     @repos = @client.repos
     @repos.each do |repo|
