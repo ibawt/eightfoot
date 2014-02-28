@@ -5,6 +5,7 @@ github issue tracker
 
 ![Screenshot of eightfood](https://raw.github.com/ibawt/eightfoot/master/screenshot.png)
 
+![Screenshot of eightfood](https://raw.github.com/ibawt/eightfoot/master/progress_gif.gif)
 Setup
 -----
 
