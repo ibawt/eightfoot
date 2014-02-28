@@ -7,6 +7,7 @@ Eightfoot::Application.routes.draw do
       get  'show_repos'
       post 'add_repos'
       get  'add_labels'
+      get  'search_repos'
     end
     post :update_position
     resources :issues do
