@@ -88,6 +88,26 @@
   text-indent: -999em;
 }
 
+.repo-label {
+  border-radius:2px;
+  flex: 1 auto;
+  overflow: hidden;
+  height: 3px;
+  margin: 1px ;
+  text-indent: -999em;
+  height: auto;
+  text-indent: 0;
+  color: white;
+  font-size: 0.8em;
+  text-shadow: 1px 1px 0px black;
+  padding:1px;
+}
+
+
+.label-legend-button {
+    font-size:0.8em;
+}
+
 .fa-code-fork {
   float:right;
   margin-left: 3px;

@@ -14,6 +14,7 @@ class IssuesController < ApplicationController
       update_issue_map(all_issues(repo, milestone),repo) if !milestone_filtered? || milestone
     end
     @issues = @project.issues.where( :gh_id => @issue_map.values.collect {| each | each[:issue].id} )
+    @labels = get_labels
   end
 
   def update_issue_map(issues,repo)
@@ -105,5 +106,11 @@ class IssuesController < ApplicationController
     milestones = @client.get("/repos/#{repo.slug}/milestones") if milestone_filtered?
     milestone = milestones.detect{ |milestone| milestone.title == params[:milestone] } if milestone_filtered?
     milestone.number if milestone
+  end
+
+  def get_labels
+    @project.repositories.reduce([]) do |acc, repo|
+      acc + @client.get("/repos/#{repo.slug}/labels")
+    end
   end
 end
