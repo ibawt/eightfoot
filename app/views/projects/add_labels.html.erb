@@ -1,4 +1,12 @@
-<h1>Add some labels</h1>
+<% @page_title = "Labels in #{@project.name}" %>
+
+<div class="alert alert-info">
+  <i class="fa fa-info-circle fa-2x"></i>
+  <span>
+    <strong>Labels</strong> correspond to the labels you've added in GitHub.  You can filter your view into <strong>Issue Manager</strong> by selecting the labels you're interested in below.  This is an <code>AND</code> filter.
+  </span>
+</div>
+
 <p> Select some labels to filter by</p>
 <ul>
   <%= simple_form_for @project do |f| %>

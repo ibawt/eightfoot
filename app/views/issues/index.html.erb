@@ -2,8 +2,10 @@
 <p>
 <%= link_to 'Project Summary', @project %>
 <% if @project.labels.any? %>
-  <span>Project Global Labels:</span>
-  <%= @project.labels.collect(&:name).join(',') %>
+  <span>Prefiltering labels by:</span>
+  <% @project.labels.collect(&:name).each do |label| %>
+    <span class="label label-primary"><%= label %></span>
+  <% end %>
 <% end %>
 </p>
 <div class="milestone-selector">

@@ -4,21 +4,22 @@
 
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Manage Repos', show_repos_project_path(@project) %> |
+<%= link_to 'Manage Repositories', show_repos_project_path(@project) %> |
 <%= link_to 'Issue Manager', project_issues_path(@project) %> |
 <%= link_to 'Add Labels', add_labels_project_path(@project) %>
 
 
-<h2>Repos in this project</h2>
-  <ul>
-    <% @project.repositories.each do |repo| %>
-      <li><%= repo.name %></li>
-    <% end %>
-  </ul>
-  <p>Labels:</p>
-  <ul>
-    <% @project.labels.each do |label| %>
-      <li><%= label.name %></li>
-    <% end %>
-  </ul>
-</p>
+<h2>Repositories in this project</h2>
+<ul>
+  <% @project.repositories.each do |repo| %>
+    <li>
+      <a target="_blank" href="https://github.com/<%= repo.name %>"><%= repo.name %></a>
+    </li>
+  <% end %>
+</ul>
+<h2>Filtering repository issues by:</h2>
+<ul>
+  <% @project.labels.each do |label| %>
+    <li><%= label.name %></li>
+  <% end %>
+</ul>
