@@ -1,4 +1,9 @@
 module IssuesHelper
+
+  def num_cols
+    @issues.max_by(&:col).col
+  end
+
   def pull_request_url(issue)
     pr = issue.try(:pull_request)
 

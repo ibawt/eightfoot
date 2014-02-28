@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_repos, :update_position, :add_labels]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_repos, :update_position, :add_labels, :change_heading]
 
   # GET /projects
   # GET /projects.json
@@ -19,6 +19,19 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+  end
+
+  def change_heading
+    heading = params.require(:heading)
+    col_number = heading['col_number']
+    value = heading['value']
+
+    current_heading_values = @project.column_headers
+    current_heading_values ||= {}
+    current_heading_values[col_number] = value
+    @project.headers = current_heading_values
+    @project.save
+    render json: {}, :status => :ok
   end
 
   def add_labels

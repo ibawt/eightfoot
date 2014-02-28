@@ -30,6 +30,13 @@
 </div>
 
 <% if @issues.size > 0 %>
+  <div id="column_headers" class="column-headers">
+    <% (1..num_cols).each do |i| %>
+      <div class="column-heading">
+        <input type="text" id="col-header-<%= i %>" value="<%= @project.column_headers[i.to_s] %>" />
+      </div>
+    <% end %>
+  </div>
 <div class="gridster">
   <ul class="gridster-data">
     <% col = 1 %>

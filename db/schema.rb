@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227174945) do
+ActiveRecord::Schema.define(version: 20140228150847) do
 
   create_table "issues", force: true do |t|
     t.integer "repository_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20140227174945) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "gh_id",      limit: 8
+    t.text     "headers"
   end
 
   create_table "repositories", force: true do |t|

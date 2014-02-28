@@ -74,6 +74,7 @@ class IssuesController < ApplicationController
     end
   end
 
+
   private
   def set_project
     @project = Project.find(params[:project_id])
@@ -89,12 +90,9 @@ class IssuesController < ApplicationController
     params[:issue]
   end
 
-  private
-
   def milestone_filtered?
     !(params[:milestone].nil? || params[:milestone] == "all")
   end
-
 
   def labels_for_repo(repo)
     #TODO make a project_labels_repository table for this

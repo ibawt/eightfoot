@@ -6,4 +6,8 @@ class Project < ActiveRecord::Base
   has_many :project_labels
 
   has_many :issues
+
+  def column_headers
+    YAML::load(headers)
+  end
 end

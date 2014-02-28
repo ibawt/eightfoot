@@ -78,3 +78,10 @@ $(document).on 'page:load ready page:fetch', ->
     urlParams["labels"] = labels
 
     window.location.search = "?" + $.param(urlParams)
+
+  change_heading = (ev) ->
+    col_number = ev.target.getAttribute('id').replace('col-header-', '')
+    data = heading: { col_number: col_number, value: ev.target.value }
+    $.post 'change_heading', data
+
+  $( '.column-heading input').on('blur', change_heading).on('keydown', (ev) -> $(ev.target).blur() if ev.keyCode == 13)
