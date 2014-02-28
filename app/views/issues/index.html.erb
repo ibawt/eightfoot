@@ -1,10 +1,13 @@
 <% @page_title = @project.name %>
 <p>
 <%= link_to 'Project Summary', @project %>
-<% if @project.labels.any? %>
+<% if @labels.any? %>
   <span>Prefiltering labels by:</span>
-  <% @project.labels.collect(&:name).each do |label| %>
-    <span class="label label-primary"><%= label %></span>
+  <% @labels.each do |label| %>
+    <span class="label-badge label label-primary">
+      <span class="label-text"><%= label %></span>
+      <i class="remove-label-button fa fa-times-circle"></i>
+    </span>
   <% end %>
 <% end %>
 </p>

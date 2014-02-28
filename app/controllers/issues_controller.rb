@@ -14,6 +14,12 @@ class IssuesController < ApplicationController
       update_issue_map(all_issues(repo, milestone),repo) if !milestone_filtered? || milestone
     end
     @issues = @project.issues.where( :gh_id => @issue_map.values.collect {| each | each[:issue].id} )
+
+    if params[:labels]
+      @labels = params[:labels].split(",")
+    else
+      @labels = @project.labels.collect(&:name)
+    end
   end
 
   def update_issue_map(issues,repo)
@@ -95,7 +101,12 @@ class IssuesController < ApplicationController
     labels = @project.labels
     repo_labels = @client.get("repos/#{repo.slug}/labels").collect(&:name)
     labels = labels.select { |l| repo_labels.include?(l.name) }
-    labels.collect(&:name).join(',')
+    labels = labels.collect(&:name).join(",")
+
+    # only include filters from query params, if query params exist
+    labels = params[:labels] if params[:labels]
+
+    labels
   end
 
   def all_issues(repo, milestone = nil)

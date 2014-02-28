@@ -51,3 +51,15 @@ $(document).on 'page:load ready page:fetch', ->
     $( ".issue-label-container" ).toggleClass("expanded")
 
   $( "#labels-legend" ).hide()
+
+  # remove repo label prefilters:
+  $(".remove-label-button").on "click", (ev) ->
+    $button = $(ev.currentTarget).parents(".label-badge").remove()
+
+    labels = []
+    for el in $(".label-badge .label-text")
+      labels.push el.textContent
+
+    labels = labels.join(",")
+
+    window.location.search = "?labels=#{labels}"

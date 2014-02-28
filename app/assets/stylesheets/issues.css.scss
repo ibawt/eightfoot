@@ -88,6 +88,16 @@
   text-indent: -999em;
 }
 
+.label-badge {
+  position: relative;
+  margin-right: 3px;
+  .remove-label-button {
+    cursor: pointer;
+    position: relative;
+    left: 2px;
+  }
+}
+
 .repo-label {
   border-radius:2px;
   flex: 1 auto;
