@@ -2,6 +2,17 @@ $(document).on 'page:load ready page:fetch', ->
   $('#milestone-selector').change ->
     window.location = "?milestone=#{encodeURI($(@).val())}"
 
+  nColumns = $(".column-heading").length
+
+  # attempt to fill the rows from the top-->bottom
+  for i in [0..nColumns]
+    column = $(".portlet[data-col='#{i}']")
+
+    j = 1
+    for row in column
+      row.dataset.row = j
+      j++
+
   $('.gridster ul').gridster
     widget_selector: '.portlet'
     widget_margins: [5,2]
