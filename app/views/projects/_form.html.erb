@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name %><br/>
     <%= f.text_field :name %>
+    <br/>
+    <%= f.label :max_issues, "Max Issues Per Repository" %><br/>
+    <%= f.number_field :max_issues %><br/>
+    <%= f.check_box :display_labels %><%= f.label :display_labels %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228150847) do
+ActiveRecord::Schema.define(version: 20140228161341) do
 
   create_table "issues", force: true do |t|
     t.integer "repository_id"
@@ -58,7 +58,9 @@ ActiveRecord::Schema.define(version: 20140228150847) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "gh_id",      limit: 8
+    t.integer  "gh_id",          limit: 8
+    t.integer  "max_issues",     limit: 8, default: 100
+    t.boolean  "display_labels",           default: true
     t.text     "headers"
   end
 

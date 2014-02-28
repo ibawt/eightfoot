@@ -24,3 +24,8 @@
     <li><%= label.name %></li>
   <% end %>
 </ul>
+<h2>Settings:</h2>
+<ul>
+  <li>Max Issues Per Repository: <%= @project.max_issues %></li>
+  <li>Display Labels: <%= @project.display_labels %></li>
+</ul>
