@@ -26,7 +26,7 @@
 
   <label for="local-filter">Filter</span>
   <input type="text" id="local-filter" placeholder="Quick filter issues">
-  <button id="labels-button" class="btn btn-sm btn-default label-legend-button">Show Labels</button>
+  <button id="labels-button" class="btn btn-sm btn-default label-legend-button">Toggle Labels</button>
 </div>
 
 <% if @issues.size > 0 %>
@@ -47,7 +47,7 @@
          repo = hash[:repo]
        %>
       <li class="portlet issue-repo-<%=@project.repositories.index(repo) % 10%>" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>" data-labels="<%= i.labels.collect(&:name).join(',') %>">
-        <div class="issue-label-container">
+        <div class="issue-label-container <%='expanded' if @project.display_labels%>">
           <% i.labels.each do |label| %>
             <div class="issue-label" title="<%=label.name%>" style="background-color:#<%=label.color%>;"><%=label.name%></div>
           <% end %>

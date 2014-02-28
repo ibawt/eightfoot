@@ -4,8 +4,6 @@ class IssuesController < ApplicationController
 
   before_action :get_milestones
 
-  MAX_ISSUES_PER_PROJECT = 100
-
   def index
     # this is kind of ugly but it works
     @issue_map = {}
@@ -112,8 +110,11 @@ class IssuesController < ApplicationController
     opts[:labels] = labels_for_repo(repo)
     opts[:milestone] = milestone if milestone
     issues = @client.list_issues(repo.slug, opts)
-    while issues.size < MAX_ISSUES_PER_PROJECT && !(rels = @client.last_response.rels[:next]).nil? do
-      issues +=  rels.get.data
+    next_request = @client.last_response.rels[:next]
+    while issues.size < @project.max_issues && next_request do
+      req = next_request.get
+      issues +=  req.data
+      next_request = req.rels[:next]
     end
     issues
   end

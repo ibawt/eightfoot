@@ -152,7 +152,10 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :repository_ids => [],
-                                    :label_ids => [])
+    params.require(:project).permit(:name,
+      :max_issues,
+      :display_labels,
+      :repository_ids => [],
+      :label_ids => [])
   end
 end
