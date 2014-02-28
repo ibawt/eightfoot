@@ -21,6 +21,14 @@
 
   <label for="local-filter">Filter</span>
   <input type="text" id="local-filter">
+  <button id="labels-button" class="label-legend-button">Label Legend</button>
+</div>
+<div id="labels-legend">
+  <% @labels.each do|label|%>
+    <span class="repo-label"
+      style="background-color:#<%=label.color%>;"><%=label.name%>
+    </span>
+  <% end %>
 </div>
 
 <% if @issues.size > 0 %>

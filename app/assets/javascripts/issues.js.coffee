@@ -45,3 +45,8 @@ $(document).on 'page:load ready page:fetch', ->
 
   $(".issue-label-container").on "click", (ev) ->
     $(ev.currentTarget).toggleClass("expanded")
+
+  $("#labels-button").on 'click', (ev) ->
+    $( "#labels-legend" ).toggle()
+
+  $( "#labels-legend" ).hide()
