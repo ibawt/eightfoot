@@ -106,7 +106,7 @@ class IssuesController < ApplicationController
   end
 
   def all_issues(repo, milestone = nil)
-    opts = { per_page: 100, sort: 'updated' }
+    opts = { per_page: [100, @project.max_issues].min, sort: 'updated' }
     opts[:labels] = labels_for_repo(repo)
     opts[:milestone] = milestone if milestone
     issues = @client.list_issues(repo.slug, opts)
