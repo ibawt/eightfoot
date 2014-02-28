@@ -52,6 +52,19 @@ $(document).on 'page:load ready page:fetch', ->
 
   $( "#labels-legend" ).hide()
 
+  # http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+  urlParams = null
+  (window.onpopstate = ->
+    pl     = /\+/g # Regex for replacing addition symbol with a space
+    search = /([^&=]+)=?([^&]*)/g
+    decode = (s) -> return decodeURIComponent(s.replace(pl, " "))
+    query  = window.location.search.substring(1)
+
+    urlParams = {}
+    while (match = search.exec(query))
+      urlParams[decode(match[1])] = decode(match[2])
+  )()
+
   # remove repo label prefilters:
   $(".remove-label-button").on "click", (ev) ->
     $button = $(ev.currentTarget).parents(".label-badge").remove()
@@ -62,4 +75,6 @@ $(document).on 'page:load ready page:fetch', ->
 
     labels = labels.join(",")
 
-    window.location.search = "?labels=#{labels}"
+    urlParams["labels"] = labels
+
+    window.location.search = "?" + $.param(urlParams)
