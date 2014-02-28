@@ -7,6 +7,7 @@ $(document).on 'page:load ready page:fetch', ->
     widget_margins: [5,2]
     widget_base_dimensions: [250,70]
     avoid_overlapped_widgets: true
+    autogrow_cols: true
     resize: { enabled: false }
     serialize_params: ($elem, coords) ->
       { id: $elem[0].id, coords: {
