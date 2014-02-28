@@ -12,7 +12,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20140228161341) do
->>>>>>> add max_issues, display_labels, fix getting all issues
 
   create_table "issues", force: true do |t|
     t.integer "repository_id"
@@ -60,9 +59,9 @@ ActiveRecord::Schema.define(version: 20140228161341) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "gh_id",          limit: 8
+    t.integer  "max_issues",     limit: 8, default: 100
+    t.boolean  "display_labels",           default: true
     t.text     "headers"
-    t.integer  "max_issues",     limit: 8  default: 100
-    t.boolean  "display_labels",           default: false
   end
 
   create_table "repositories", force: true do |t|
