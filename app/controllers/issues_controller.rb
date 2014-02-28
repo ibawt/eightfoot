@@ -90,9 +90,17 @@ class IssuesController < ApplicationController
   end
 
 
+  def labels_for_repo(repo)
+    #TODO make a project_labels_repository table for this
+    labels = @project.labels
+    repo_labels = @client.get("repos/#{repo.slug}/labels").collect(&:name)
+    labels = labels.select { |l| repo_labels.include?(l.name) }
+    labels.collect(&:name).join(',')
+  end
+
   def all_issues(repo, milestone = nil)
     opts = { per_page: 100, sort: 'updated' }
-    opts[:labels] = @project.labels.collect(&:name).join(',')
+    opts[:labels] = labels_for_repo(repo)
     opts[:milestone] = milestone if milestone
     issues = @client.list_issues(repo.slug, opts)
     while issues.size < MAX_ISSUES_PER_PROJECT && !(rels = @client.last_response.rels[:next]).nil? do
