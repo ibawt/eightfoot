@@ -3,7 +3,9 @@
 <%= link_to('Project Summary', @project) %>
 
 <div>
-  <p id="notice"><%= notice %></p>
+  <% if notice %>
+  <div class="alert alert-success"><%= notice %></div>
+  <% end %>
   <div class="alert alert-info">
     <i class="fa fa-info-circle fa-2x"></i>
     <span>
@@ -16,7 +18,7 @@
     <%= f.button :submit, "Submit" %>
   <% end %>
   <% if flash[:error] -%>
-    <p class='error'><%=h flash[:error] %></p>
+    <div class='alert alert-danger'><%=h flash[:error] %></div>
   <% end -%>
   <h4>Or add a custom read-only repository</h4>
   <%= simple_form_for :repository, { url: 'add_repos' } do |f| %>

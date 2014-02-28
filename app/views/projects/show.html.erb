@@ -1,7 +1,8 @@
 <% @page_title = @project.name %>
 
-<p id="notice"><%= notice %></p>
-
+<% if notice %>
+<div class="alert alert-success"><%= notice %></div>
+<% end %>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Manage Repositories', show_repos_project_path(@project) %> |
