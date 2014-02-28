@@ -41,7 +41,7 @@
          i = hash[:issue]
          repo = hash[:repo]
        %>
-      <li class="portlet issue-repo-<%=repo.id% 10%>" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>" data-labels="<%= i.labels.collect(&:name).join(',') %>">
+      <li class="portlet issue-repo-<%=@project.repositories.index(repo) % 10%>" id="<%= issue.id %>" data-sizex="<%= issue.width %>" data-sizey="<%= issue.height %>" data-col="<%= issue.col %>" data-row="<%= issue.row %>" data-labels="<%= i.labels.collect(&:name).join(',') %>">
         <div class="issue-label-container">
           <% i.labels.each do |label| %>
             <div class="issue-label" title="<%=label.name%>" style="background-color:#<%=label.color%>;"><%=label.name%></div>
@@ -74,6 +74,7 @@
             <% end %>
             <span class="issue-title">
               <%= i.title %>
+
             </span>
           </span>
         </div>
