@@ -1,12 +1,15 @@
-eightfoot
+# eightfoot
 =========
 
 github issue tracker
 
+#### Screen Shot
 ![Screenshot of eightfood](https://raw.github.com/ibawt/eightfoot/master/screenshot.png)
 
+#### Progress 
 ![Screenshot of eightfood](https://raw.github.com/ibawt/eightfoot/master/progress_gif.gif)
-Setup
+
+### Setup
 -----
 
 1. `bundle install`
@@ -19,3 +22,9 @@ Setup
 8. Visit [http://localhost:3000](http://localhost:3000) and log in with your GitHub account credentials
 
 Try not testing it against any majorly sensitive repos right now!!
+
+### TODO:
+
+ - Cull issues that are closed and not opend after signifant time?
+ - Display branch status ci for PR's
+
