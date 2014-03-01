@@ -3,14 +3,20 @@
 <div class="alert alert-info">
   <i class="fa fa-info-circle fa-2x"></i>
   <span>
-    <strong>Labels</strong> correspond to the labels you've added in GitHub.  You can filter your view into <strong>Issue Manager</strong> by selecting the labels you're interested in below.
+    <strong>Labels</strong> correspond to the labels you've added in GitHub.  You can filter your view into <strong>Issue Manager</strong> by selecting the labels you're interested in below.  The Labels are per repository.
   </span>
 </div>
 
 <p> Select some labels to filter by</p>
-<ul>
-  <%= simple_form_for @project do |f| %>
-    <%= f.association :labels, :label_method => :name, :as => :check_boxes, :multiple => true %>
-    <%= f.button :submit, "Submit" %>
+<%= simple_form_for @project do |f| %>
+  <% @project.repositories.each do |repo| %>
+    <div class="project-label">
+      <h3><%= repo.name %></h3>
+      <ul>
+        <% repo.labels.each do |label| %>
+          <li><%= label.name %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-</ul>
+<% end %>

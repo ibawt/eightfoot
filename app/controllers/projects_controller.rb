@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_repos, :update_position, :add_labels, :change_heading]
+  before_action :set_project, except: [:index, :new, :create]
 
   def index
     @projects = Project.all
@@ -29,17 +29,14 @@ class ProjectsController < ApplicationController
   end
 
   def add_labels
-    @labels = []
-    @project.repositories.each do |repo|
+    @repos = @project.repositories
+    @repos.each do |repo|
       repo_labels = @client.get("repos/#{repo.slug}/labels")
-      @labels.concat repo_labels
       repo_labels.each do |r|
-        l = Label.find_or_create_by(:name => r.name)
+        l = Label.find_or_create_by(:name => r.name, :repository => repo)
         l.save if l.changed?
       end
     end
-
-    @labels = Label.all
   end
 
   def update_position
