@@ -36,6 +36,8 @@ group :development, :test do
   gem 'spring'
   gem 'pry-byebug'
   gem 'pry-coolline'
+  gem 'guard'
+  gem 'guard-rspec'
 end
 
 group :doc do

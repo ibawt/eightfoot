@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ProjectsController do
   describe "#index" do
-    it "populates the projects array"
+    it "populates the projects arrayfdsfds"
     it "render the index view"
   end
 
