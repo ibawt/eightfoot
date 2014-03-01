@@ -1,6 +1,10 @@
 language: ruby
 rvm:
   - 2.0.0
+services:
+  - mysql
+before_script:
+  - bundle exec rake db:test:prepare
 script:
   - bundle exec rspec spec
   - bundle exec rake brakeman:run
