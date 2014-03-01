@@ -27,4 +27,6 @@ Try not testing it against any majorly sensitive repos right now!!
 
  - Cull issues that are closed and not opend after signifant time?
  - Display branch status ci for PR's
+ - Be more intelligent about updating issues (with 2000 issues, things get really slow)
+ - Add colour PR's differently (currently only the fork shows them as different)
 
