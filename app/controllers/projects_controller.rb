@@ -23,8 +23,8 @@ class ProjectsController < ApplicationController
     current_heading_values = @project.column_headers
     current_heading_values ||= {}
     current_heading_values[col_number] = value
-    @project.headers = current_heading_values
-    @project.save
+    @project.update(headers: current_heading_values)
+
     render json: {}, :status => :ok
   end
 

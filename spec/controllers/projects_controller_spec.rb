@@ -3,27 +3,50 @@ require 'spec_helper'
 describe ProjectsController do
   login_user
 
+  let(:project) { FactoryGirl.create(:project) }
+
   describe "#index" do
     it "populates the projects array" do
-      project = create(:project)
       get :index
       assigns(:projects).should eq([project])
     end
-    it "render the index view"
+    it "render the index view" do
+      get :index
+      response.should render_template :index
+    end
   end
 
   describe "#show" do
-    it "populates the one project"
-    it "renders the show view"
+    it "populates the one project" do
+      get :show, id: project
+      assigns(:project).should eq(project)
+    end
+    it "renders the show view" do
+      get :show, id: project
+
+      response.should render_template :show
+    end
   end
 
   describe "#new" do
-    it "creates a new project for population"
-    it "renders the new view"
+    it "creates a new project for population" do
+      Project.should_receive(:new)
+      get :new
+      assigns(:project)
+    end
+    it "renders the new view" do
+      get :new
+      response.should render_template :new
+    end
   end
 
   describe "POST #change_heading" do
-    it "should change the value of the column in the db"
+    let(:heading_params) { { col_number: 1, value: "foo" } }
+
+    it "should change the value of the column in the db" do
+      post :change_heading, project_id: project, heading: heading_params
+      expect(project.reload.column_headers).to eq( { '1' => "foo" } )
+    end
     it "should handle a nil value for the header"
     it "should respond to the heading"
     it "should render an empty json response with ok on success"
