@@ -51,9 +51,12 @@ gem 'jquery-ui-rails'
 gem 'mysql2'
 gem 'bootstrap-sass'
 gem 'unicorn'
-gem 'bluecloth'
+
 group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
   gem 'better_errors'
+  gem 'factory_girl_rails'
+  gem 'capybara'
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'pry-rails'
