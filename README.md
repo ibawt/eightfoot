@@ -4,7 +4,7 @@
 A Github issue tracker.
 
 [![Build Status](https://travis-ci.org/ibawt/eightfoot.png?branch=master)](https://travis-ci.org/ibawt/eightfoot)
-
+[![Code Climate](https://codeclimate.com/github/ibawt/eightfoot.png)](https://codeclimate.com/github/ibawt/eightfoot)
 ##### Screen Shot
 ![Screenshot of eightfood](https://raw.github.com/ibawt/eightfoot/master/screenshot.png)
 
