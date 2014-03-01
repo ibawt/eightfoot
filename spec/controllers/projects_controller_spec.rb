@@ -1,8 +1,14 @@
 require 'spec_helper'
 
 describe ProjectsController do
+  login_user
+
   describe "#index" do
-    it "populates the projects arrayfdsfds"
+    it "populates the projects array" do
+      project = create(:project)
+      get :index
+      assigns(:projects).should eq([project])
+    end
     it "render the index view"
   end
 
