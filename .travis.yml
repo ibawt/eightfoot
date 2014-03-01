@@ -2,5 +2,5 @@ language: ruby
 rvm:
   - 2.0.0
 script:
-  bundle exec rspec spec
-  bundle exec rake brakeman:run
+  - bundle exec rspec spec
+  - bundle exec rake brakeman:run
