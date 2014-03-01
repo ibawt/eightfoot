@@ -1,0 +1,141 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/user
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.beta+json
+      User-Agent:
+      - Octokit Ruby Gem 2.7.1
+      Authorization:
+      - token <GITHUB_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 01 Mar 2014 23:11:06 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4965'
+      X-Ratelimit-Reset:
+      - '1393716500'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Last-Modified:
+      - Sat, 01 Mar 2014 22:11:52 GMT
+      Etag:
+      - '"ce476190e2bcb6f712cf8e4a3e12667c"'
+      X-Oauth-Scopes:
+      - gist, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      X-Github-Media-Type:
+      - github.beta; format=json
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - '*'
+      X-Github-Request-Id:
+      - C654F122:5370:461FABA:5312690A
+    body:
+      encoding: UTF-8
+      string: '{"login":"ibawt","id":1743173,"avatar_url":"https://avatars.githubusercontent.com/u/1743173","gravatar_id":"a231c8900f21f95192090442d4f94323","url":"https://api.github.com/users/ibawt","html_url":"https://github.com/ibawt","followers_url":"https://api.github.com/users/ibawt/followers","following_url":"https://api.github.com/users/ibawt/following{/other_user}","gists_url":"https://api.github.com/users/ibawt/gists{/gist_id}","starred_url":"https://api.github.com/users/ibawt/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/ibawt/subscriptions","organizations_url":"https://api.github.com/users/ibawt/orgs","repos_url":"https://api.github.com/users/ibawt/repos","events_url":"https://api.github.com/users/ibawt/events{/privacy}","received_events_url":"https://api.github.com/users/ibawt/received_events","type":"User","site_admin":false,"name":"Ian
+        Quick","company":"Shopify","blog":null,"location":"Ottawa","email":"ian.quick@gmail.com","hireable":false,"bio":"http://www.linkedin.com/profile/view?id=33765685&trk=tab_pro","public_repos":17,"public_gists":3,"followers":5,"following":0,"created_at":"2012-05-15T18:17:19Z","updated_at":"2014-03-01T22:11:52Z","private_gists":1,"total_private_repos":0,"owned_private_repos":0,"disk_usage":16884,"collaborators":0,"plan":{"name":"free","space":307200,"collaborators":0,"private_repos":0}}'
+    http_version: 
+  recorded_at: Sat, 01 Mar 2014 23:11:06 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/rails/rails/labels
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.beta+json
+      User-Agent:
+      - Octokit Ruby Gem 2.7.1
+      Authorization:
+      - token <GITHUB_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 01 Mar 2014 23:11:06 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4964'
+      X-Ratelimit-Reset:
+      - '1393716500'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Etag:
+      - '"3389bab92476a2c6d2bb7de2fce50b3c"'
+      X-Oauth-Scopes:
+      - gist, repo, user
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      X-Github-Media-Type:
+      - github.beta; format=json
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - '*'
+      X-Github-Request-Id:
+      - C654F122:5370:461FAF6:5312690A
+    body:
+      encoding: UTF-8
+      string: '[{"url":"https://api.github.com/repos/rails/rails/labels/bug","name":"bug","color":"444444"},{"url":"https://api.github.com/repos/rails/rails/labels/regression","name":"regression","color":"e10c02"},{"url":"https://api.github.com/repos/rails/rails/labels/enhancement","name":"enhancement","color":"02e10c"},{"url":"https://api.github.com/repos/rails/rails/labels/actionmailer","name":"actionmailer","color":"8B00FC"},{"url":"https://api.github.com/repos/rails/rails/labels/actionpack","name":"actionpack","color":"FFF700"},{"url":"https://api.github.com/repos/rails/rails/labels/activemodel","name":"activemodel","color":"00E5FF"},{"url":"https://api.github.com/repos/rails/rails/labels/activerecord","name":"activerecord","color":"0b02e1"},{"url":"https://api.github.com/repos/rails/rails/labels/activesupport","name":"activesupport","color":"FC9300"},{"url":"https://api.github.com/repos/rails/rails/labels/railties","name":"railties","color":"8BE06E"},{"url":"https://api.github.com/repos/rails/rails/labels/reviewed","name":"reviewed","color":"008800"},{"url":"https://api.github.com/repos/rails/rails/labels/needs+feedback","name":"needs
+        feedback","color":"ededed"},{"url":"https://api.github.com/repos/rails/rails/labels/asset+pipeline","name":"asset
+        pipeline","color":"d7e102"},{"url":"https://api.github.com/repos/rails/rails/labels/3-1-stable","name":"3-1-stable","color":"e102d8"},{"url":"https://api.github.com/repos/rails/rails/labels/3-0-stable","name":"3-0-stable","color":"0b02e1"},{"url":"https://api.github.com/repos/rails/rails/labels/third+party+issue","name":"third
+        party issue","color":"02d7e1"},{"url":"https://api.github.com/repos/rails/rails/labels/docs","name":"docs","color":"02d7e1"},{"url":"https://api.github.com/repos/rails/rails/labels/i18n","name":"i18n","color":"e102d8"},{"url":"https://api.github.com/repos/rails/rails/labels/3-2-stable","name":"3-2-stable","color":"02d7e1"},{"url":"https://api.github.com/repos/rails/rails/labels/2-3-stable","name":"2-3-stable","color":"444444"},{"url":"https://api.github.com/repos/rails/rails/labels/actionview","name":"actionview","color":"d7e102"},{"url":"https://api.github.com/repos/rails/rails/labels/discussion+","name":"discussion
+        ","color":"0b02e1"},{"url":"https://api.github.com/repos/rails/rails/labels/Important","name":"Important","color":"e10c02"},{"url":"https://api.github.com/repos/rails/rails/labels/oracle","name":"oracle","color":"DDDDDD"},{"url":"https://api.github.com/repos/rails/rails/labels/engines","name":"engines","color":"e102d8"},{"url":"https://api.github.com/repos/rails/rails/labels/onhold","name":"onhold","color":"ededed"},{"url":"https://api.github.com/repos/rails/rails/labels/JRuby","name":"JRuby","color":"02d7e1"},{"url":"https://api.github.com/repos/rails/rails/labels/stale","name":"stale","color":"444444"},{"url":"https://api.github.com/repos/rails/rails/labels/rack-head","name":"rack-head","color":"d7e102"},{"url":"https://api.github.com/repos/rails/rails/labels/jobs","name":"jobs","color":"ededed"},{"url":"https://api.github.com/repos/rails/rails/labels/routing","name":"routing","color":"e102d8"},{"url":"https://api.github.com/repos/rails/rails/labels/4-0-stable","name":"4-0-stable","color":"fbca04"},{"url":"https://api.github.com/repos/rails/rails/labels/master","name":"master","color":"0052cc"},{"url":"https://api.github.com/repos/rails/rails/labels/attached+PR","name":"attached
+        PR","color":"006b75"},{"url":"https://api.github.com/repos/rails/rails/labels/Level%3AEasy","name":"Level:Easy","color":"009800"},{"url":"https://api.github.com/repos/rails/rails/labels/Level%3AIntermediary","name":"Level:Intermediary","color":"fad8c7"},{"url":"https://api.github.com/repos/rails/rails/labels/rubinius","name":"rubinius","color":"f7c6c7"},{"url":"https://api.github.com/repos/rails/rails/labels/deep_munge","name":"deep_munge","color":"FFFFFF"},{"url":"https://api.github.com/repos/rails/rails/labels/PostgreSQL","name":"PostgreSQL","color":"fbca04"},{"url":"https://api.github.com/repos/rails/rails/labels/openacademy","name":"openacademy","color":"eb6420"}]'
+    http_version: 
+  recorded_at: Sat, 01 Mar 2014 23:11:07 GMT
+recorded_with: VCR 2.8.0

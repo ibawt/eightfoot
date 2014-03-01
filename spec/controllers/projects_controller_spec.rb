@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe ProjectsController do
+describe ProjectsController, :vcr  do
   login_user
 
-  let(:project) { FactoryGirl.create(:project) }
+  let(:project) { FactoryGirl.create(:project_with_repositories) }
 
   describe "#index" do
     it "populates the projects array" do
@@ -73,7 +73,8 @@ describe ProjectsController do
 
   describe "GET #add_labels" do
     it "should populate repos with the projects repos" do
-
+      get :add_labels, id: project
+      assigns(:repos).should eq(project.repositories)
     end
     it "should retreive the labels for each repo"
     it "should save the new label associated with the repo"

@@ -3,6 +3,14 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'webmock/rspec'
+
+VCR.configure do |v|
+  v.cassette_library_dir = 'spec/cassettes'
+  v.hook_into :webmock
+  v.configure_rspec_metadata!
+  v.filter_sensitive_data("<GITHUB_TOKEN>") { ENV['TEST_API_TOKEN'] }
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -19,7 +27,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
-
+  config.treat_symbols_as_metadata_keys_with_true_values = true
   config.before(:suite)  do
     begin
       DatabaseCleaner.start
