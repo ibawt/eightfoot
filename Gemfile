@@ -23,6 +23,7 @@ gem 'font-awesome-rails'
 gem 'underscore-rails'
 
 group :development, :test do
+  gem 'brakeman'
   gem 'rspec-rails', '~> 2.0'
   gem 'better_errors'
   gem 'factory_girl_rails'
