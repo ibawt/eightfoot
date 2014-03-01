@@ -21,7 +21,6 @@ class ProjectsController < ApplicationController
     value = heading['value']
 
     current_heading_values = @project.column_headers
-    current_heading_values ||= {}
     current_heading_values[col_number] = value
     @project.update(headers: current_heading_values)
 

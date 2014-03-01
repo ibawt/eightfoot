@@ -47,10 +47,28 @@ describe ProjectsController do
       post :change_heading, project_id: project, heading: heading_params
       expect(project.reload.column_headers).to eq( { '1' => "foo" } )
     end
-    it "should handle a nil value for the header"
-    it "should respond to the heading"
-    it "should render an empty json response with ok on success"
-    it "should merge the data with the old"
+
+    it "should handle a nil value for the header" do
+      expect {
+        post :change_heading, project_id: project, heading: heading_params
+      }.to_not raise_error
+    end
+
+    it "should require the heading" do
+      expect {
+        post :change_heading, project_id: project
+      }.to raise_error(ActionController::ParameterMissing)
+    end
+
+    it "should render an empty json response with ok on success" do
+      post :change_heading, project_id: project, heading: heading_params
+      expect(assert_response :ok)
+    end
+    it "should merge the data with the old" do
+      project = create(:project, { headers: { "2" => "bar" } } )
+      post :change_heading, project_id: project, heading: heading_params
+      expect(project.reload.column_headers).to eq( { "1" => "foo", "2" => "bar" } )
+    end
   end
 
   describe "GET #add_labels" do
