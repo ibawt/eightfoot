@@ -1,28 +1,20 @@
 class RepositoriesController < ApplicationController
   before_action :set_repository, only: [:show, :edit, :update, :destroy]
 
-  # GET /repositories
-  # GET /repositories.json
   def index
     @repositories = Repository.all
   end
 
-  # GET /repositories/1
-  # GET /repositories/1.json
   def show
   end
 
-  # GET /repositories/new
   def new
     @repository = Repository.new
   end
 
-  # GET /repositories/1/edit
   def edit
   end
 
-  # POST /repositories
-  # POST /repositories.json
   def create
     @repository = Repository.new(repository_params)
 
@@ -37,8 +29,6 @@ class RepositoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /repositories/1
-  # PATCH/PUT /repositories/1.json
   def update
     respond_to do |format|
       if @repository.update(repository_params)
@@ -51,8 +41,6 @@ class RepositoriesController < ApplicationController
     end
   end
 
-  # DELETE /repositories/1
-  # DELETE /repositories/1.json
   def destroy
     @repository.destroy
     respond_to do |format|
@@ -62,13 +50,12 @@ class RepositoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_repository
-      @repository = Repository.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def repository_params
-      params[:repository]
-    end
+  def set_repository
+    @repository = Repository.find(params[:id])
+  end
+
+  def repository_params
+    params[:repository]
+  end
 end

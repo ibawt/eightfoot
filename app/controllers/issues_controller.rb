@@ -39,17 +39,12 @@ class IssuesController < ApplicationController
     @milestones = @milestones.collect(&:title).to_set
   end
 
-  # GET /issues/1
-  # GET /issues/1.json
   def show
   end
 
-  # GET /issues/1/edit
   def edit
   end
 
-  # PATCH/PUT /issues/1
-  # PATCH/PUT /issues/1.json
   def update
     respond_to do |format|
       if @issue.update(issue_params)
@@ -62,8 +57,6 @@ class IssuesController < ApplicationController
     end
   end
 
-  # DELETE /issues/1
-  # DELETE /issues/1.json
   def destroy
     @issue.destroy
     respond_to do |format|
@@ -72,18 +65,16 @@ class IssuesController < ApplicationController
     end
   end
 
-
   private
+
   def set_project
     @project = Project.find(params[:project_id])
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_issue
     @issue = Issue.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def issue_params
     params[:issue]
   end

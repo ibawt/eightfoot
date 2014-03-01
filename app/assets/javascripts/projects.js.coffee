@@ -1,10 +1,5 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
 # =require jquery.ui.autocomplete
 $(document).on 'page:load ready page:fetch', ->
-
 
   $("#repository_slug").on 'keyup', (ev) ->
     perform_repo_search(ev.currentTarget.value)
