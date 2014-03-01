@@ -7,6 +7,9 @@ class Project < ActiveRecord::Base
 
   has_many :issues
 
+  validates :name, presence: true
+  validates :max_issues, numericality: {greater_than: 0, only_integer: true}
+
   def column_headers
     result = YAML::load(headers || '')
     result ? result : {}
