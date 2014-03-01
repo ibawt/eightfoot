@@ -72,7 +72,9 @@ describe ProjectsController do
   end
 
   describe "GET #add_labels" do
-    it "should populate repos with the projects repos"
+    it "should populate repos with the projects repos" do
+
+    end
     it "should retreive the labels for each repo"
     it "should save the new label associated with the repo"
   end

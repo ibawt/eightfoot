@@ -23,6 +23,7 @@ gem 'font-awesome-rails'
 gem 'underscore-rails'
 
 group :development, :test do
+  gem 'database_cleaner'
   gem 'brakeman'
   gem 'rspec-rails', '~> 2.0'
   gem 'better_errors'
