@@ -1,15 +1,15 @@
-# eightfoot
+## eightfoot
 =========
 
 github issue tracker
 
-#### Screen Shot
+##### Screen Shot
 ![Screenshot of eightfood](https://raw.github.com/ibawt/eightfoot/master/screenshot.png)
 
-#### Progress 
+##### Progress 
 ![Screenshot of eightfood](https://raw.github.com/ibawt/eightfoot/master/progress_gif.gif)
 
-### Setup
+#### Setup
 -----
 
 1. `bundle install`
@@ -23,7 +23,7 @@ github issue tracker
 
 Try not testing it against any majorly sensitive repos right now!!
 
-### TODO:
+#### TODO:
 
  - Cull issues that are closed and not opend after signifant time?
  - Display branch status ci for PR's
