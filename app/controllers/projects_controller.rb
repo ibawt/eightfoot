@@ -130,7 +130,11 @@ class ProjectsController < ApplicationController
   private
 
   def needs_refresh?
-    LastEdit.last.user_id == current_user.id
+    if last_edit = LastEdit.last
+      last_edit.user_id == current_user.id
+    else
+      false
+    end
   end
 
   def set_project

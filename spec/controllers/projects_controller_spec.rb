@@ -101,10 +101,7 @@ describe ProjectsController, :vcr  do
       post :update_position, project_id: project
       expect(response.status).to eq(423)
     end
-    it "will iterate over each issue and save the row/col" do
-      post :update_position, project_id: project, issues: test_params
-
-    end
+    it "will iterate over each issue and save the row/col"
     it "will update the LastEdit"
   end
 
