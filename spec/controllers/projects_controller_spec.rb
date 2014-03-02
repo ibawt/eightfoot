@@ -91,8 +91,20 @@ describe ProjectsController, :vcr  do
   end
 
   describe "POST #update_position" do
-    it "will render a refresh response if you werent the last edit"
-    it "will iterate over each issue and save the row/col"
+    let(:test_params) {
+      [ { 'id' => "1", "coords" => { "row" => "1", "col" => "1" } },
+       { 'id' => "2", "coords" => { "row" => "2", "col" => "2" } } ]
+    }
+
+    it "will render a refresh response if you werent the last edit" do
+      controller.should_receive(:needs_refresh?).and_return(true)
+      post :update_position, project_id: project
+      expect(response.status).to eq(423)
+    end
+    it "will iterate over each issue and save the row/col" do
+      post :update_position, project_id: project, issues: test_params
+
+    end
     it "will update the LastEdit"
   end
 

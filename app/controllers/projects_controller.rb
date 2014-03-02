@@ -39,26 +39,23 @@ class ProjectsController < ApplicationController
   end
 
   def update_position
-    if last_edit = LastEdit.last
-      if last_edit.user_id != current_user.id
-        render json: { refresh: true }, :status => :ok
+    if needs_refresh?
+      render json: { refresh: true }, :status => :locked
+    else
+      params[:issues].each_value do |issue|
+        my_issue = Issue.find(issue['id'].to_i)
+        coords = issue['coords']
+        my_issue.row = coords['row'].to_i
+        my_issue.col = coords['col'].to_i
+        my_issue.width = coords['size_x'].to_i
+        my_issue.height = coords['size_y'].to_i
+        my_issue.save
       end
-    end
 
-    params[:issues].each_value do |issue|
-      my_issue = Issue.find(issue['id'].to_i)
-      coords = issue['coords']
-      my_issue.row = coords['row'].to_i
-      my_issue.col = coords['col'].to_i
-      my_issue.width = coords['size_x'].to_i
-      my_issue.height = coords['size_y'].to_i
-      my_issue.save
+      l = LastEdit.create(:user_id => current_user.id)
+      l.save
+      render json: {last_edit: l}, :status => :ok
     end
-
-    l = LastEdit.create(:user_id => current_user.id)
-    l.save
-    session[:last_edit] = l
-    render json: {last_edit: l}, :status => :ok
   end
 
   def add_repos
@@ -131,6 +128,10 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def needs_refresh?
+    LastEdit.last.user_id == current_user.id
+  end
 
   def set_project
     @project = Project.find(params[:id] || params[:project_id])

@@ -10,13 +10,8 @@
 <p> Select some labels to filter by</p>
 <%= simple_form_for @project do |f| %>
   <% @project.repositories.each do |repo| %>
-    <div class="project-label">
-      <h3><%= repo.name %></h3>
-      <ul>
-        <% repo.labels.each do |label| %>
-          <li><%= label.name %></li>
-        <% end %>
-      </ul>
-    </div>
+    <h1><%= repo.name %></h1>
+    <%= f.association :labels, :label_method => :name, :collection => repo.labels, :as => :check_boxes, :multiple => true %>
   <% end %>
+  <%= f.button :submit, "Submit" %>
 <% end %>
