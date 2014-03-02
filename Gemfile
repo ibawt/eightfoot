@@ -22,8 +22,11 @@ gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 gem 'underscore-rails'
 
+group :test do
+    gem 'webmock', '1.15'
+end
+
 group :development, :test do
-  gem 'webmock', '1.15'
   gem 'vcr'
   gem 'database_cleaner'
   gem 'brakeman'

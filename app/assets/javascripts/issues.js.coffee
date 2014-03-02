@@ -20,18 +20,18 @@ $(document).on 'page:load ready page:fetch', ->
     avoid_overlapped_widgets: true
     autogrow_cols: true
     resize: { enabled: false }
-    serialize_params: ($elem, coords) ->
-      { id: $elem[0].id, coords: {
-        col: coords.col,
-        row: coords.row,
-        size_x: coords.size_x,
-        size_y: coords.size_y
-        }
-      }
+    serialize_params: (elem, coords) ->
+      { id: elem[0].id, row: coords.row, col: coords.col }
+
     draggable:
       stop: (event,ui) ->
-        data = issues: $('.gridster ul').gridster().data('gridster').serialize()
-        $.post('update_position', data).done (data) ->
+        data = $('.gridster ul').gridster().data('gridster').serialize()
+        data = _(data).reduce( (acc, val) ->
+          acc[val.id] = { row: val.row, col: val.col }
+          acc
+        , {})
+
+        $.post('update_position', issues: data).done (data) ->
           if data.refresh
             location.reload()
 

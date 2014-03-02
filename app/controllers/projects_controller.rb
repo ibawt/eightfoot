@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   end
 
   def change_heading
-    heading = params.require(:heading)
+    heading = params.require(:heading).permit(:col_number, :value)
     col_number = heading['col_number']
     value = heading['value']
 
@@ -42,18 +42,9 @@ class ProjectsController < ApplicationController
     if needs_refresh?
       render json: { refresh: true }, :status => :locked
     else
-      params[:issues].each_value do |issue|
-        my_issue = Issue.find(issue['id'].to_i)
-        coords = issue['coords']
-        my_issue.row = coords['row'].to_i
-        my_issue.col = coords['col'].to_i
-        my_issue.width = coords['size_x'].to_i
-        my_issue.height = coords['size_y'].to_i
-        my_issue.save
-      end
-
+      issue_params = params.require(:issues)
+      Issue.update(issue_params.keys, issue_params.values)
       l = LastEdit.create(:user_id => current_user.id)
-      l.save
       render json: {last_edit: l}, :status => :ok
     end
   end
@@ -130,11 +121,7 @@ class ProjectsController < ApplicationController
   private
 
   def needs_refresh?
-    if last_edit = LastEdit.last
-      last_edit.user_id == current_user.id
-    else
-      false
-    end
+    false
   end
 
   def set_project
