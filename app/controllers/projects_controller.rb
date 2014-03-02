@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
   def add_labels
     @repos = @project.repositories
     @repos.each do |repo|
-      repo_labels = @client.get("repos/#{repo.slug}/labels")
+      repo_labels = @client.labels("#{repo.slug}")
       repo_labels.each do |r|
         l = Label.find_or_create_by(:name => r.name, :repository => repo)
         l.save if l.changed?

@@ -76,8 +76,18 @@ describe ProjectsController, :vcr  do
       get :add_labels, id: project
       assigns(:repos).should eq(project.repositories)
     end
-    it "should retreive the labels for each repo"
-    it "should save the new label associated with the repo"
+
+    it "should retreive the labels for each repo" do
+      Octokit::Client.any_instance.should_receive(:labels).with('ibawt/eightfoot').once.and_return([])
+      get :add_labels, id: project
+    end
+
+    it "should save the new label associated with the repo" do
+      get :add_labels, id: project
+      %w(bug duplicate enhancement invalid question wontfix design security).each do |name|
+        expect(Label.where(name: name)).to exist
+      end
+    end
   end
 
   describe "POST #update_position" do

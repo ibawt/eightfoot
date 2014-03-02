@@ -19,6 +19,6 @@ FactoryGirl.define do
   end
 
   factory :repository do |r|
-    slug "rails/rails"
+    slug "ibawt/eightfoot"
   end
 end
