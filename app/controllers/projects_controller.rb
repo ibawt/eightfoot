@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
   def add_labels
     @repos = @project.repositories
     @repos.each do |repo|
-      repo_labels = @client.labels("#{repo.slug}")
+      repo_labels = github_client.labels("#{repo.slug}")
       repo_labels.each do |r|
         l = Label.find_or_create_by(:name => r.name, :repository => repo)
         l.save if l.changed?
@@ -52,12 +52,12 @@ class ProjectsController < ApplicationController
   def add_repos
     begin
       repo_params = params.require(:repository).permit(:slug)
-      gh_repo = @client.get("repos/#{repo_params[:slug]}") if repo_params[:slug]
+      gh_repo = github_client.get("repos/#{repo_params[:slug]}") if repo_params[:slug]
       if gh_repo
         @repo = Repository.create(repo_params)
         @repo.save if gh_repo
       end
-    rescue => e
+    rescue
       flash[:error] = "No such repo #{params[:slug]}" unless gh_repo
     end
 
@@ -65,7 +65,7 @@ class ProjectsController < ApplicationController
   end
 
   def search_repos
-    results = @client.get("/search/repositories?q=#{params[:term]}")
+    results = github_client.get("/search/repositories?q=#{params[:term]}")
     names = results.items.collect(&:full_name)
     respond_to do | format|
       format.json { render json: names }
@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
   end
 
   def show_repos
-    @repos = @client.repos
+    @repos = github_client.repos
     @repos.each do |repo|
       r = Repository.find_or_create_by(:slug => repo.full_name)
       r.save if r.changed?

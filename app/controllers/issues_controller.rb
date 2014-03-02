@@ -34,7 +34,7 @@ class IssuesController < ApplicationController
 
   def get_milestones
     @milestones = @project.repositories.reduce([]) do |acc, repo|
-      acc + @client.get("/repos/#{repo.slug}/milestones")
+      acc + github_client.get("/repos/#{repo.slug}/milestones")
     end
     @milestones = @milestones.collect(&:title).to_set
   end
@@ -95,8 +95,8 @@ class IssuesController < ApplicationController
     opts = { per_page: [100, @project.max_issues].min, sort: 'updated' }
     opts[:labels] = labels_for_repo(repo)
     opts[:milestone] = milestone if milestone
-    issues = @client.list_issues(repo.slug, opts)
-    next_request = @client.last_response.rels[:next]
+    issues = github_client.list_issues(repo.slug, opts)
+    next_request = github_client.last_response.rels[:next]
     while issues.size < @project.max_issues && next_request do
       req = next_request.get
       issues +=  req.data
@@ -106,8 +106,8 @@ class IssuesController < ApplicationController
   end
 
   def find_milestone(repo)
-    milestones = @client.get("/repos/#{repo.slug}/milestones") if milestone_filtered?
-    milestone = milestones.detect{ |milestone| milestone.title == params[:milestone] } if milestone_filtered?
+    milestones = github_client.get("/repos/#{repo.slug}/milestones") if milestone_filtered?
+    milestone = milestones.detect{ |m| m.title == params[:milestone] } if milestone_filtered?
     milestone.number if milestone
   end
 
