@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_repos, :update_position, :add_labels, :change_heading]
+  before_action :set_project, except: [:index, :new, :create]
 
   def index
     @projects = Project.all
@@ -21,48 +21,41 @@ class ProjectsController < ApplicationController
     value = heading['value']
 
     current_heading_values = @project.column_headers
-    current_heading_values ||= {}
     current_heading_values[col_number] = value
-    @project.headers = current_heading_values
-    @project.save
+    @project.update(headers: current_heading_values)
+
     render json: {}, :status => :ok
   end
 
   def add_labels
-    @labels = []
-    @project.repositories.each do |repo|
-      repo_labels = @client.get("repos/#{repo.slug}/labels")
-      @labels.concat repo_labels
+    @repos = @project.repositories
+    @repos.each do |repo|
+      repo_labels = @client.labels("#{repo.slug}")
       repo_labels.each do |r|
-        l = Label.find_or_create_by(:name => r.name)
+        l = Label.find_or_create_by(:name => r.name, :repository => repo)
         l.save if l.changed?
       end
     end
-
-    @labels = Label.all
   end
 
   def update_position
-    if last_edit = LastEdit.last
-      if last_edit.user_id != current_user.id
-        render json: { refresh: true }, :status => :ok
+    if needs_refresh?
+      render json: { refresh: true }, :status => :locked
+    else
+      params[:issues].each_value do |issue|
+        my_issue = Issue.find(issue['id'].to_i)
+        coords = issue['coords']
+        my_issue.row = coords['row'].to_i
+        my_issue.col = coords['col'].to_i
+        my_issue.width = coords['size_x'].to_i
+        my_issue.height = coords['size_y'].to_i
+        my_issue.save
       end
-    end
 
-    params[:issues].each_value do |issue|
-      my_issue = Issue.find(issue['id'].to_i)
-      coords = issue['coords']
-      my_issue.row = coords['row'].to_i
-      my_issue.col = coords['col'].to_i
-      my_issue.width = coords['size_x'].to_i
-      my_issue.height = coords['size_y'].to_i
-      my_issue.save
+      l = LastEdit.create(:user_id => current_user.id)
+      l.save
+      render json: {last_edit: l}, :status => :ok
     end
-
-    l = LastEdit.create(:user_id => current_user.id)
-    l.save
-    session[:last_edit] = l
-    render json: {last_edit: l}, :status => :ok
   end
 
   def add_repos
@@ -135,6 +128,14 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def needs_refresh?
+    if last_edit = LastEdit.last
+      last_edit.user_id == current_user.id
+    else
+      false
+    end
+  end
 
   def set_project
     @project = Project.find(params[:id] || params[:project_id])

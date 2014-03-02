@@ -37,6 +37,10 @@ We thought you might like to take a look at the design of eightfoot as we iterat
 
 Try not testing it against any majorly sensitive repos right now!!
 
+### Development
+1. set an environment variable 'TEST_API_TOKEN'
+2. this will let you record new tests with VCR
+
 #### TODO:
 
  - Cull issues that are closed and not opend after signifant time?

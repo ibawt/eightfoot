@@ -84,12 +84,7 @@ class IssuesController < ApplicationController
   end
 
   def labels_for_repo(repo)
-    #TODO make a project_labels_repository table for this
-    labels = @project.labels
-    repo_labels = @client.get("repos/#{repo.slug}/labels").collect(&:name)
-    labels = labels.select { |l| repo_labels.include?(l.name) }
-    labels = labels.collect(&:name).join(",")
-
+    labels = @project.labels.where(repository: repo).collect(&:name).join(',')
     # only include filters from query params, if query params exist
     labels = params[:labels] if params[:labels]
 
