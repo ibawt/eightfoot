@@ -18,6 +18,14 @@ FactoryGirl.define do
     end
   end
 
+  sequence :gh_id do |n|
+    n
+  end
+
+  factory :issue do
+    gh_id :gh_id
+  end
+
   factory :repository do |r|
     slug "ibawt/eightfoot"
   end

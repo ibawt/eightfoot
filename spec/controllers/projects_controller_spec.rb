@@ -91,9 +91,12 @@ describe ProjectsController, :vcr  do
   end
 
   describe "POST #update_position" do
+    let(:test_issues) {
+      create_list( :issue, 3, project: project)
+    }
+
     let(:test_params) {
-      [ { 'id' => "1", "coords" => { "row" => "1", "col" => "1" } },
-       { 'id' => "2", "coords" => { "row" => "2", "col" => "2" } } ]
+      { test_issues[0].id => { row: 2, col: 2 }, test_issues[1].id => { row: 1, col: 1 } }
     }
 
     it "will render a refresh response if you werent the last edit" do
@@ -101,8 +104,20 @@ describe ProjectsController, :vcr  do
       post :update_position, project_id: project
       expect(response.status).to eq(423)
     end
-    it "will iterate over each issue and save the row/col"
-    it "will update the LastEdit"
+    it "will iterate over each issue and save the row/col" do
+      post :update_position, project_id: project, issues: test_params
+      expect(test_issues[0].reload.row).to eq 2
+      expect(test_issues[0].reload.col).to eq 2
+      expect(test_issues[1].reload.row).to eq 1
+      expect(test_issues[1].reload.col).to eq 1
+    end
+
+    it "will update the LastEdit" do
+      expect {
+        post :update_position, project_id: project, issues: test_params
+      }.to change(LastEdit, :count).by 1
+      expect(response.status).to eq 200
+    end
   end
 
   describe "POST #add_repos" do
