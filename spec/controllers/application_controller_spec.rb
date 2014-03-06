@@ -19,9 +19,29 @@ describe ApplicationController do
     end
 
     describe "github_client tests" do
-      it "should assign the client from prepare_github if its not assigned already"
-      it "should grab the user and login"
-      it "should return the assigned client if it's there already"
+      let(:gh_user) { {:login => ""} }
+      let(:client) { {:user => gh_user} }
+
+      before(:each) do
+        expect(controller).to receive(:prepare_github).once.and_return(client)
+        expect(client).to receive(:user).once.and_return(gh_user)
+        expect(gh_user).to receive(:login).once
+      end
+
+      it "should assign the client from prepare_github if its not assigned already" do
+        assigns(:client)
+        controller.github_client
+      end
+
+      it "should grab the user and login" do
+        assigns(:gh_user)
+        controller.github_client
+      end
+
+      it "should return the assigned client if it's there already" do
+        controller.github_client
+        controller.github_client
+      end
     end
   end
 end
