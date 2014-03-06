@@ -1,0 +1,3 @@
+class InvitedUser < User
+
+end

@@ -1,22 +1,28 @@
 <% @page_title = "Add Users to #{@project.name}" %>
 <%= link_to 'Project Summary', @project %>
 
+<script>
+  var add_path = "/projects/<%= @project.id %>/add_user";
+</script>
+
 <h2>People from your organizations:</h2>
 <% @organizations.each do |org| %>
-  <h3 class="organization-header">
+  <div class="organization-header">
     <a class="organization-avatar" href="<%= org.rels[:html].href %>" target="_blank">
       <img src="<%= org.rels[:avatar].href %>" />
     </a>
-    <%= org.login %>
-
-    <label for="local-filter-<%= org.login %>">Filter Users</span>
-    <input type="text" id="local-filter-<%= org.login %>" class="local-filter" data-filter-for="<%= org.login %>" placeholder="Quick filter issues">
-  </h3>
+    <h3><%= org.login %></h3>
+    <input type="text" class="local-filter" data-filter-for="<%= org.login %>" placeholder="Quick filter users">
+  </div>
   <ul class="user-list local-filterable" data-name="<%= org.login %>">
     <% org.members.each do |member| %>
     <li class="user-tile" data-meta='["<%= member.login %>"]'>
       <div class="user-avatar">
         <img src="<%= member.rels[:avatar].href %>" />
+        <div class="user-add-remove-controls">
+          <i class="fa fa-plus-square user-add-button button" data-username='<%= member.login %>'></i>
+          <i class="fa fa-minus-square user-remove-button button" data-username='<%= member.login %>'></i>
+        </div>
       </div>
       <span class="user-login">
         <a href="<%= member.rels[:html].href %>" target="_blank">

@@ -41,3 +41,9 @@ $(document).on 'page:load ready page:fetch', ->
   , 100
 
   $(".local-filter").on 'keyup', localSearch
+
+  $(".user-add-button").on 'click', (ev) ->
+    username = $(ev.currentTarget).data("username")
+    $.post(add_path, {
+      username: username
+    })

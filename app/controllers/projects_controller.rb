@@ -69,6 +69,21 @@ class ProjectsController < ApplicationController
     @organizations = @project.organizations(@client)
   end
 
+  def add_user
+    user = InvitedUser.find_or_initialize_by_nickname(:nickname => params[:username])
+
+    if user.save(:validate => false)
+      user.projects += @project
+      if user.save(:validate => false)
+        format.json { render json: {}, status: :ok }
+      else
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
+    else
+      format.json { render json: @project.errors, status: :unprocessable_entity }
+    end
+  end
+
   def search_repos
     results = github_client.get("/search/repositories?q=#{params[:term]}")
     names = results.items.collect(&:full_name)
