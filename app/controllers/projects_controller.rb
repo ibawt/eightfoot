@@ -66,7 +66,7 @@ class ProjectsController < ApplicationController
 
   def add_users
     @repos = @project.repositories
-    @organizations = @client.organizations
+    @organizations = @project.organizations(@client)
   end
 
   def search_repos

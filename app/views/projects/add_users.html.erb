@@ -3,17 +3,23 @@
 
 <h2>People from your organizations:</h2>
 <% @organizations.each do |org| %>
-  <a href="<%= org.rels[:self].href %>" target="_blank">
-    <img src="<%= org.rels[:avatar].href %>" />
-  </a>
-  <ul>
-    <% members = @client.get(org.rels[:members].href) %>
-    <% members.each do |member| %>
-    <li>
+  <h3 class="organization-header">
+    <a class="organization-avatar" href="<%= org.rels[:html].href %>" target="_blank">
+      <img src="<%= org.rels[:avatar].href %>" />
+    </a>
+    <%= org.login %>
+  </h3>
+  <ul class="user-list">
+    <% org.members.each do |member| %>
+    <li class="user-tile">
       <div class="user-avatar">
         <img src="<%= member.rels[:avatar].href %>" />
       </div>
-      <%= member.login %>
+      <span class="user-login">
+        <a href="<%= member.rels[:html].href %>" target="_blank">
+          <%= member.login %>
+        </a>
+      </span>
     </li>
     <% end %>
   </ul>
