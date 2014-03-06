@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
 
   has_many :labels, through: :project_labels
   has_many :project_labels
+  has_many :users, through: :project_users
+  has_many :project_users, :dependent => :destroy
 
   has_many :issues
 

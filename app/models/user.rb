@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :omniauthable,
     :omniauth_providers => [:github]
 
+  belongs_to :projects
 
   def self.find_for_github_auth(auth)
     where(auth.slice(:provider,:uid)).first_or_initialize.tap do |user|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301154702) do
+ActiveRecord::Schema.define(version: 20140306182517) do
 
   create_table "issues", force: true do |t|
     t.integer "repository_id"
@@ -55,14 +55,22 @@ ActiveRecord::Schema.define(version: 20140301154702) do
   add_index "project_repositories", ["project_id"], name: "index_project_repositories_on_project_id", using: :btree
   add_index "project_repositories", ["repository_id"], name: "index_project_repositories_on_repository_id", using: :btree
 
+  create_table "project_users", force: true do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+  end
+
+  add_index "project_users", ["project_id"], name: "index_project_users_on_project_id", using: :btree
+  add_index "project_users", ["user_id"], name: "index_project_users_on_user_id", using: :btree
+
   create_table "projects", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "gh_id",          limit: 8
+    t.integer  "gh_id",           limit: 8
+    t.integer  "max_issues",      limit: 8, default: 100
+    t.boolean  "display_labels",            default: true
     t.text     "headers"
-    t.integer  "max_issues",     limit: 8, default: 100
-    t.boolean  "display_labels",           default: false
   end
 
   create_table "repositories", force: true do |t|
