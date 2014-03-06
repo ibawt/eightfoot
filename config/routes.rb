@@ -13,6 +13,7 @@ Eightfoot::Application.routes.draw do
       post 'add_repos'
       get  'add_labels'
       get  'search_repos'
+      get  'add_users'
     end
     post :change_heading
     post :update_position

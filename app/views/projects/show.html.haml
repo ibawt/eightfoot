@@ -38,3 +38,10 @@
     Max Issues Per Repository: #{@project.max_issues}
   %li.list-group-item
     Display Labels: #{@project.display_labels}
+%h2 Users with access to this project:
+%ul
+  - @project.users.each do |user|
+    %li= "#{user.nickname} -- #{user.email}"
+
+
+= link_to 'Add Users', add_users_project_path(@project)

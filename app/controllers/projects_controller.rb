@@ -64,6 +64,11 @@ class ProjectsController < ApplicationController
     redirect_to show_repos_project_path
   end
 
+  def add_users
+    @repos = @project.repositories
+    @organizations = @client.organizations
+  end
+
   def search_repos
     results = github_client.get("/search/repositories?q=#{params[:term]}")
     names = results.items.collect(&:full_name)
