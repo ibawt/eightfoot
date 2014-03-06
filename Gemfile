@@ -23,7 +23,7 @@ gem 'font-awesome-rails'
 gem 'underscore-rails'
 
 group :test do
-    gem 'webmock', '1.15'
+  gem 'webmock', '1.15'
 end
 
 group :development, :test do
