@@ -17,3 +17,27 @@ $(document).on 'page:load ready page:fetch', ->
           response( data )
         )
     )
+
+  searchifyText = (str) ->
+    str.toLowerCase().trim()
+
+  localSearch = _.throttle (ev) ->
+    toFilter = $(ev.currentTarget).data("filter-for")
+    filterTargets = $(".local-filterable[data-name='#{toFilter}'] li")
+
+    search = searchifyText($(ev.currentTarget).val())
+
+    filterTargets.removeClass("no-match")
+    for ele in filterTargets
+      $ele = $(ele)
+      meta = $ele.data('meta')
+
+      for value in meta
+        matched = false
+        if searchifyText(value).indexOf(search) >= 0
+          matched = true
+
+      $ele.addClass("no-match") if !matched
+  , 100
+
+  $(".local-filter").on 'keyup', localSearch

@@ -8,10 +8,13 @@
       <img src="<%= org.rels[:avatar].href %>" />
     </a>
     <%= org.login %>
+
+    <label for="local-filter-<%= org.login %>">Filter Users</span>
+    <input type="text" id="local-filter-<%= org.login %>" class="local-filter" data-filter-for="<%= org.login %>" placeholder="Quick filter issues">
   </h3>
-  <ul class="user-list">
+  <ul class="user-list local-filterable" data-name="<%= org.login %>">
     <% org.members.each do |member| %>
-    <li class="user-tile">
+    <li class="user-tile" data-meta='["<%= member.login %>"]'>
       <div class="user-avatar">
         <img src="<%= member.rels[:avatar].href %>" />
       </div>

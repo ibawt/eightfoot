@@ -24,6 +24,10 @@ $header-height: 35px;
     -ms-box-sizing: border-box;
 }
 
+.no-match {
+    opacity: 0.35;
+}
+
 @mixin clearfix {
     &:before, &:after {
          content: " ";
@@ -190,6 +194,7 @@ blockquote {
 }
 
 .user-tile {
+    transition: opacity 0.25s ease-in-out;
     height: 120px;
     width: 100px;
     margin: 1em;
