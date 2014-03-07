@@ -72,12 +72,14 @@ class ProjectsController < ApplicationController
 
   def add_user
 
-    user_info = github_client.user(params[:username])
+    github_nickname = params.require(:username)
+
+    user_info = github_client.user(github_nickname)
 
     user = InvitedUser.find_or_initialize_by_nickname(
       :email => user_info.email,
       :image => user_info.rels[:avatar].href,
-      :nickname => params[:username],
+      :nickname => github_nickname,
       :uid => user_info.id,
       :name => user_info.name
     )

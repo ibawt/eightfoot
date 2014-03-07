@@ -211,6 +211,24 @@ describe ProjectsController, :vcr  do
     it "should populate the repos list with all the repos"
   end
 
+  describe "GET add_users" do
+    it "should query gh for the list of organizations and users"
+  end
+
+  describe "POST add_user" do
+    it "should add an InvitedUser to the project" do
+      post :add_user, id: project, username: "qq99"
+      project.reload
+      project.users.last.nickname.should eq("qq99")
+      project.users.last.type.should eq("InvitedUser")
+    end
+    it "should error when no github username is supplied" do
+      expect {
+        post :add_user, id: project, foo: 'bar'
+      }.to raise_error(ActionController::ParameterMissing)
+    end
+  end
+
   describe "create" do
     it "should create a new project with the supplied params"
     it "should redirect on save to the project and set a notice"
