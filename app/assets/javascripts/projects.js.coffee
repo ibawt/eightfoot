@@ -52,4 +52,5 @@ $(document).on 'page:load ready page:fetch', ->
     username = $(ev.currentTarget).data("username")
     $.post(remove_path, {
       username: username
-    })
+    }).done (data) ->
+      $(ev.currentTarget).parents(".user-tile").remove()
