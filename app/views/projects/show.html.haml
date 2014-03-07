@@ -1,0 +1,23 @@
+- @page_title = @project.name
+- if notice
+  .alert.alert-success= notice
+= link_to 'Edit', edit_project_path(@project)
+|
+\#{link_to 'Manage Repositories', show_repos_project_path(@project)} |
+\#{link_to 'Issue Manager', project_issues_path(@project)} |
+\#{link_to 'Add Labels', add_labels_project_path(@project)}
+%h2 Repositories in this project
+%ul
+  - @project.repositories.each do |repo|
+    %li
+      %a{:href => "https://github.com/#{repo.name}", :target => "_blank"}= repo.name
+%h2 Filtering repository issues by:
+%ul
+  - @project.labels.each do |label|
+    %li= label.name
+%h2 Settings:
+%ul
+  %li
+    Max Issues Per Repository: #{@project.max_issues}
+  %li
+    Display Labels: #{@project.display_labels}

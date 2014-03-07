@@ -21,6 +21,7 @@ gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 gem 'underscore-rails'
+gem 'haml-rails'
 
 group :test do
   gem 'webmock', '1.15'

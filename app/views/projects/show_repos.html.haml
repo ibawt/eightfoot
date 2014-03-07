@@ -1,0 +1,22 @@
+- @page_title =  'Manage repositories in ' + @project.name
+= link_to('Project Summary', @project)
+%div
+  - if notice
+    .alert.alert-success= notice
+  .alert.alert-info
+    %i.fa.fa-info-circle.fa-2x
+    %span
+      %strong Projects
+      can aggregate issues across multiple GitHub repositories.  They can also set be set up to scope issues by only certain labels.
+  %p
+    Select which repositories you'll display in
+    %strong= @project.name
+  = simple_form_for @project do |f|
+    = f.association :repositories, label_method: :slug,as: :check_boxes, multiple: true
+    = f.button :submit, "Submit"
+  - if flash[:error]
+    .alert.alert-danger= h flash[:error]
+  %h4 Or add a custom read-only repository
+  = simple_form_for :repository, { url: 'add_repos' } do |f|
+    = f.input :slug, label: false, placeholder: "username/project"
+    = f.button :submit, "Add Repository"
