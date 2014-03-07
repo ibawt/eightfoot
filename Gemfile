@@ -22,7 +22,8 @@ gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 gem 'underscore-rails'
 gem 'haml-rails'
-
+gem 'dalli'
+gem 'yajl-ruby'
 group :test do
   gem 'webmock', '1.15'
 end
