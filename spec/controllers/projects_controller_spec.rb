@@ -4,11 +4,78 @@ describe ProjectsController, :vcr  do
   user = FactoryGirl.create(:user)
   login_user(user)
 
+  unauthorized_user = FactoryGirl.create(:user)
+
   let(:project) {
     project = FactoryGirl.create(:project_with_repositories)
     project.users << user
     project
   }
+
+  describe 'unauthorized users' do
+    login_user(unauthorized_user)
+    it "cannot see other user's projects in index" do
+      get :index
+      response.status.should eq(200)
+      assigns(:project).should_not eq(project)
+    end
+    it "cannot see other user's projects in show" do
+      expect {
+        get :show, id: project
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+    it "cannot edit other people's projects" do
+      expect {
+        put :update, id: project, name: 'foobaz'
+      }.to raise_error{ActiveRecord::RecordNotFound}
+    end
+    it "cannot destroy other people's projects" do
+      expect {
+        post :destroy, id: project
+      }.to raise_error{ActiveRecord::RecordNotFound}
+    end
+    it "cannot update the headers of another user's project" do
+      expect {
+        post :change_heading, project_id: project, heading: { col_number: 1, value: "foo" }
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+    it "cannot get the labels of another user's project" do
+      expect {
+        get :add_labels, id: project
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+    describe 'trying to change issue positions' do
+      let(:test_issues) {
+        create_list( :issue, 3, project: project)
+      }
+
+      let(:test_params) {
+        { test_issues[0].id => { row: 2, col: 2 }, test_issues[1].id => { row: 1, col: 1 } }
+      }
+
+      it "are blocked from doing so" do
+        expect {
+          post :update_position, project_id: project, issues: test_params
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+    it "cannot add repos to another user's project"
+    it "cannot add users to another user's project" do
+      expect {
+        post :add_user, id: project, username: "qq99"
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+    it "cannot view a list of users to add to another user's project" do
+      expect {
+        get :add_users, id: project
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+    it "cannot remove users from another user's project" do
+      expect {
+        post :remove_user, id: project, username: "qq99"
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
 
   describe "#index" do
     it "populates the projects array" do
@@ -87,6 +154,7 @@ describe ProjectsController, :vcr  do
       get :add_labels, id: project
     end
 
+    # broken?? this is a get
     it "should save the new label associated with the repo" do
       get :add_labels, id: project
       %w(bug duplicate enhancement invalid question wontfix design security).each do |name|
