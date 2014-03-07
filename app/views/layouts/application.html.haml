@@ -39,5 +39,5 @@
     #main-panel.eightfoot-panel
       - if @page_title
         %h1.ef-pagetitle= @page_title
-      .eightfoot-body
+      .eightfoot-body{class: @page_type}
         = yield

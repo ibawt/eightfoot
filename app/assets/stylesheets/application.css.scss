@@ -116,6 +116,10 @@ blockquote {
 .eightfoot-body {
     padding: 2em;
     top: 0;
+    &.normal-page {
+        width: 60em;
+        margin: auto;
+    }
 }
 
 .eightfoot-description {
