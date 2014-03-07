@@ -41,7 +41,7 @@
         <a href="/" class="btn eightfoot-icon"></a>
         <a href="<%= projects_path %>" class="btn eightfoot-navbar-text">Projects</a>
         <div class="dropdown eightfoot-avatar pull-right">
-          <img data-toggle="dropdown" class="dropdown-toggle" height="100%" src="<%= @gh_user.rels[:avatar].href %>" />
+          <img data-toggle="dropdown" class="dropdown-toggle" height="100%" src="<%= avatar_image_url %>" />
           <ul class="dropdown-menu" role="menu">
             <li role="presentation">
               <a href="<%= destroy_user_session_path %>">Sign Out</a>
