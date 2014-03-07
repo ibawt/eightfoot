@@ -208,9 +208,12 @@ blockquote {
     .button {
         display: block;
     }
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
 }
 .user-add-button {
-    margin-top:0.25em;
     color: green;
 }
 .user-remove-button {

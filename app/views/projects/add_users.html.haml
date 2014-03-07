@@ -15,4 +15,4 @@
     %input.local-filter{type: "text", data: {filter_for: org.login}, placeholder: "Quick filter users"}
   %ul.user-list.local-filterable{data: {name: org.login}}
     - org.members.each do |user|
-      = render partial: 'shared/user_tile', locals: {user: user}
+      = render partial: 'shared/user_tile', locals: {user: user, add_button: true, remove_button: false}

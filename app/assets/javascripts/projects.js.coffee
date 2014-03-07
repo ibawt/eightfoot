@@ -42,15 +42,20 @@ $(document).on 'page:load ready page:fetch', ->
 
   $(".local-filter").on 'keyup', localSearch
 
-  $(".user-add-button").on 'click', (ev) ->
-    username = $(ev.currentTarget).data("username")
+  $(document).on 'click', ".user-add-button", (ev) ->
+    username = $(ev.target).data("username")
     $.post(add_path, {
       username: username
-    })
+    }).done (data) ->
+      $(ev.target).removeClass("user-add-button fa-plus-square").addClass("fa-minus-square user-remove-button toggling")
 
-  $(".user-remove-button").on 'click', (ev) ->
-    username = $(ev.currentTarget).data("username")
+  $(document).on 'click', ".user-remove-button", (ev) ->
+    username = $(ev.target).data("username")
     $.post(remove_path, {
       username: username
     }).done (data) ->
-      $(ev.currentTarget).parents(".user-tile").remove()
+      $clicked = $(ev.target)
+      if !$clicked.hasClass("toggling")
+        $clicked.parents(".user-tile").remove()
+      else
+        $clicked.removeClass("fa-minus-square user-remove-button").addClass("user-add-button fa-plus-square")
