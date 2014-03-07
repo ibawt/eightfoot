@@ -6,9 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-redis = Redis.new(:host => '127.0.0.1', :port => ENV['BOXEN_REDIS_PORT'] || 6379)
-
-$redis = Redis::Namespace.new(:eightfoot, redis: redis)
 
 module Eightfoot
   class Application < Rails::Application
@@ -24,5 +21,15 @@ module Eightfoot
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+  end
+
+  def self.build_redis
+    redis = Redis.new(:host => '127.0.0.1', :port => ENV['BOXEN_REDIS_PORT'] || 6379)
+    Redis::Namespace.new(:eightfoot, redis: redis)
+  end
+
+  mattr_accessor :redis
+  def self.redis=(value)
+    @@redis = value
   end
 end
