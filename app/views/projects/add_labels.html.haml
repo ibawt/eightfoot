@@ -1,0 +1,14 @@
+- @page_title = "Labels in #{@project.name}"
+.alert.alert-info
+  %i.fa.fa-info-circle.fa-2x
+  %span
+    %strong Labels
+    correspond to the labels you've added in GitHub.  You can filter your view into
+    %strong Issue Manager
+    by selecting the labels you're interested in below.  The Labels are per repository.
+%p Select some labels to filter by
+= simple_form_for @project do |f|
+  - @project.repositories.each do |repo|
+    %h1= repo.name
+    = f.association :labels, :label_method => :name, :collection => repo.labels, :as => :check_boxes, :multiple => true
+  = f.button :submit, "Submit"

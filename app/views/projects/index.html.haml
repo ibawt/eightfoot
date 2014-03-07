@@ -1,0 +1,15 @@
+- @page_title = 'Team Projects'
+= link_to 'New Project', new_project_path
+%table.tablelist
+  %thead
+    %tr
+      %th Name
+      %th
+      %th
+      %th
+  %tbody
+    - @projects.each do |project|
+      %tr
+        %td= link_to project.name, project_issues_path(project)
+        %td= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+%br/

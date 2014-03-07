@@ -1,0 +1,15 @@
+%h1 Listing repositories
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+  %tbody
+    - @repositories.each do |repository|
+      %tr
+        %td= link_to 'Show', repository
+        %td= link_to 'Edit', edit_repository_path(repository)
+        %td= link_to 'Destroy', repository, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Repository', new_repository_path
