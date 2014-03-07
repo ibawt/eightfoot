@@ -70,17 +70,25 @@ class ProjectsController < ApplicationController
   end
 
   def add_user
-    user = InvitedUser.find_or_initialize_by_nickname(:nickname => params[:username])
 
-    if user.save(:validate => false)
-      user.projects += @project
-      if user.save(:validate => false)
-        format.json { render json: {}, status: :ok }
+    user_info = @client.user(params[:username])
+
+    user = InvitedUser.find_or_initialize_by_nickname(
+      :email => user_info.email,
+      :image => user_info.rels[:avatar].href,
+      :nickname => params[:username],
+      :uid => user_info.id,
+      :name => user_info.name
+    )
+
+    user.transaction do
+      user.save(:validate => false)
+      @project.users << user
+      if @project.save
+        render json: {}, status: :ok
       else
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        render json: user.errors, status: :unprocessable_entity
       end
-    else
-      format.json { render json: @project.errors, status: :unprocessable_entity }
     end
   end
 
