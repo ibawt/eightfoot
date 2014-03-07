@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   def self.find_for_github_auth(auth)
     where(auth.slice(:provider,:uid)).first_or_initialize.tap do |user|
-      unless user.persisted?
+      if (user.persisted? and user.type == "InvitedUser") or !user.persisted?
         user.provider = auth.provider
         user.uid = auth.uid
         user.email = auth.info.email
@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
         user.nickname = auth.info.nickname
         user.token = auth.credentials.token
         user.expires = auth.credentials.expires
+        user.type = "RegularUser"
         user.save!
       end
     end
