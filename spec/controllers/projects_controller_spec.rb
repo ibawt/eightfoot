@@ -218,7 +218,12 @@ describe ProjectsController, :vcr  do
   end
 
   describe "destroy" do
-    it "should destroy the project"
+    it "should destroy the project" do
+      post :destroy, id: project
+      expect {
+        project.reload
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
     it "should redirect to the projects index"
   end
 
