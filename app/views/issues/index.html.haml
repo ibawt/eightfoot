@@ -51,7 +51,7 @@
                   %i.fa.fa-comments-o
                   = i.comments
               - if pr_url = pull_request_url(i)
-                %a{:href => pull_request_changes_url(pr_url), :target => "_blank"}
+                %a.pr-link{:href => pull_request_changes_url(pr_url), :target => "_blank"}
                   %i.fa.fa-code-fork
               %span.issue-title
                 = i.title
