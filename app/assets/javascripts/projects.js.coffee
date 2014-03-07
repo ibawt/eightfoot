@@ -42,6 +42,7 @@ $(document).on 'page:load ready page:fetch', ->
 
   $(".local-filter").on 'keyup', localSearch
 
+  $(document).off 'click', '.user-add-button'
   $(document).on 'click', ".user-add-button", (ev) ->
     username = $(ev.target).data("username")
     $.post(add_path, {
@@ -49,6 +50,7 @@ $(document).on 'page:load ready page:fetch', ->
     }).done (data) ->
       $(ev.target).removeClass("user-add-button fa-plus-square").addClass("fa-minus-square user-remove-button toggling")
 
+  $(document).off 'click', '.user-remove-button'
   $(document).on 'click', ".user-remove-button", (ev) ->
     username = $(ev.target).data("username")
     $.post(remove_path, {
