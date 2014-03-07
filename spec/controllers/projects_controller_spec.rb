@@ -70,7 +70,7 @@ describe ProjectsController, :vcr  do
       expect(assert_response :ok)
     end
     it "should merge the data with the old" do
-      project = create(:project, { headers: { "2" => "bar" } } )
+      project.update(headers: { "2" => "bar" })
       post :change_heading, project_id: project, heading: heading_params
       expect(project.reload.column_headers).to eq( { "1" => "foo", "2" => "bar" } )
     end
