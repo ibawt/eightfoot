@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe ApplicationController do
-  login_user
+  @user = FactoryGirl.create(:user)
+  login_user(@user)
 
   describe "github helper tests" do
     describe "prepare_github" do

@@ -1,9 +1,14 @@
 require 'spec_helper'
 
 describe ProjectsController, :vcr  do
-  login_user
+  user = FactoryGirl.create(:user)
+  login_user(user)
 
-  let(:project) { FactoryGirl.create(:project_with_repositories) }
+  let(:project) {
+    project = FactoryGirl.create(:project_with_repositories)
+    project.users << user
+    project
+  }
 
   describe "#index" do
     it "populates the projects array" do
