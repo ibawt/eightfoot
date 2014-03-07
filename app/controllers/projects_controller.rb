@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @detailed_users = @project.detailed_users(@client)
   end
 
   def new
@@ -89,6 +90,16 @@ class ProjectsController < ApplicationController
       else
         render json: user.errors, status: :unprocessable_entity
       end
+    end
+  end
+
+  def remove_user
+    user = User.find_by_nickname(params[:username])
+    @project.users.delete(user)
+    if @project.save
+      render json: {}, status: :ok
+    else
+      render json: @project.errors, status: :unprocessable_entity
     end
   end
 

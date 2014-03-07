@@ -47,3 +47,9 @@ $(document).on 'page:load ready page:fetch', ->
     $.post(add_path, {
       username: username
     })
+
+  $(".user-remove-button").on 'click', (ev) ->
+    username = $(ev.currentTarget).data("username")
+    $.post(remove_path, {
+      username: username
+    })

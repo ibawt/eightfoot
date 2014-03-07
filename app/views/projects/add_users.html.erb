@@ -3,6 +3,7 @@
 
 <script>
   var add_path = "/projects/<%= @project.id %>/add_user";
+  var remove_path = "/projects/<%= @project.id %>/remove_user";
 </script>
 
 <h2>People from your organizations:</h2>
@@ -15,21 +16,8 @@
     <input type="text" class="local-filter" data-filter-for="<%= org.login %>" placeholder="Quick filter users">
   </div>
   <ul class="user-list local-filterable" data-name="<%= org.login %>">
-    <% org.members.each do |member| %>
-    <li class="user-tile" data-meta='["<%= member.login %>"]'>
-      <div class="user-avatar">
-        <img src="<%= member.rels[:avatar].href %>" />
-        <div class="user-add-remove-controls">
-          <i class="fa fa-plus-square user-add-button button" data-username='<%= member.login %>'></i>
-          <i class="fa fa-minus-square user-remove-button button" data-username='<%= member.login %>'></i>
-        </div>
-      </div>
-      <span class="user-login">
-        <a href="<%= member.rels[:html].href %>" target="_blank">
-          <%= member.login %>
-        </a>
-      </span>
-    </li>
+    <% org.members.each do |user| %>
+    <%= render partial: 'shared/user_tile', locals: {user: user} %>
     <% end %>
   </ul>
 <% end %>

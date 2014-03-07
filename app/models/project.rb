@@ -21,12 +21,12 @@ class Project < ActiveRecord::Base
     opts = { per_page: 100, sort: 'login' }
     orgs = []
 
-    # get a rich representation of all orgs
+    # get all orgs
     client.organizations.each do |gh_org|
       orgs << client.get(gh_org.rels[:self].href, opts)
     end
 
-    # get a rich representation of all orgs' members
+    # paginate over each orgs' members
     orgs.each do |org|
       clients = []
       gh_members = client.get(org.rels[:members].href)
@@ -40,5 +40,13 @@ class Project < ActiveRecord::Base
       org.members = gh_members
     end
     orgs
+  end
+
+  def detailed_users(client)
+    details = []
+    users.each do |u|
+      details << client.user(u.nickname)
+    end
+    details
   end
 end

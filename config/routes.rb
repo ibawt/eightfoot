@@ -15,6 +15,7 @@ Eightfoot::Application.routes.draw do
       get  'search_repos'
       get  'add_users'
       post 'add_user'
+      post 'remove_user'
     end
     post :change_heading
     post :update_position
