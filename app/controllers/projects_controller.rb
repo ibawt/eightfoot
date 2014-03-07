@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @detailed_users = @project.detailed_users(@client)
+    @detailed_users = @project.detailed_users(github_client)
   end
 
   def new
@@ -67,12 +67,12 @@ class ProjectsController < ApplicationController
 
   def add_users
     @repos = @project.repositories
-    @organizations = @project.organizations(@client)
+    @organizations = @project.organizations(github_client)
   end
 
   def add_user
 
-    user_info = @client.user(params[:username])
+    user_info = github_client.user(params[:username])
 
     user = InvitedUser.find_or_initialize_by_nickname(
       :email => user_info.email,

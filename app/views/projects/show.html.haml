@@ -10,6 +10,11 @@
     Manage Repositories
   %a.btn.btn-default{href: add_labels_project_path(@project)} Manage Project Label Filters
 
+%script
+  :plain
+    var add_path = "/projects/#{@project.id}/add_user";
+    var remove_path = "/projects/#{@project.id}/remove_user";
+
 %h2 Repositories in this project
 - if @project.repositories.any?
   %ul.list-group
@@ -39,9 +44,8 @@
   %li.list-group-item
     Display Labels: #{@project.display_labels}
 %h2 Users with access to this project:
-%ul
-  - @project.users.each do |user|
-    %li= "#{user.nickname} -- #{user.email}"
-
+%ul.user-list.local-filterable
+  - @detailed_users.each do |user|
+    = render partial: 'shared/user_tile', locals: {user: user}
 
 = link_to 'Add Users', add_users_project_path(@project)
