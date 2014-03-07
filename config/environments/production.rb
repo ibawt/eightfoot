@@ -77,4 +77,8 @@ Eightfoot::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.after_initialize do
+    Eightfoot.redis = Eightfoot.build_redis
+  end
 end

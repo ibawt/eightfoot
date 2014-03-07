@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Eightfoot::Application.routes.draw do
   root :to => 'projects#index'
 
@@ -23,5 +25,7 @@ Eightfoot::Application.routes.draw do
   devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
 
   resources :users
-
+  authenticate :user do
+    mount Sidekiq::Web, at: "/sidekiq"
+  end
 end
