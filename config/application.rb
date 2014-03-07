@@ -6,6 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+redis = Redis.new(:host => '127.0.0.1', :port => ENV['BOXEN_REDIS_PORT'] || 6379)
+
+$redis = Redis::Namespace.new(:eightfoot, redis: redis)
+
 module Eightfoot
   class Application < Rails::Application
     config.encoding = "utf-8"

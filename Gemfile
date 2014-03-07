@@ -11,7 +11,7 @@ gem 'devise'
 gem 'omniauth-github'
 gem 'faraday-http-cache'
 gem 'simple_form'
-
+gem 'sidekiq'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -24,6 +24,13 @@ gem 'underscore-rails'
 gem 'haml-rails'
 gem 'dalli'
 gem 'yajl-ruby'
+gem 'redis'
+gem 'redis-namespace'
+
+gem 'sinatra', require: false
+gem 'slim'
+gem 'foreman'
+
 group :test do
   gem 'webmock', '1.15'
 end
