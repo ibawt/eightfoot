@@ -165,7 +165,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:id] || params[:project_id])
+    @project = current_user.projects.find(params[:id] || params[:project_id])
   end
 
   def project_params
