@@ -1,5 +1,5 @@
 = bootstrap_form_for(@project) do |f|
-  = f.text_field :name, label: "Name"
+  = f.text_field :name
   = f.number_field :max_issues
   = f.check_box :display_labels
   = f.submit "Save", {class: "btn btn-primary"}

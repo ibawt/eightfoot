@@ -117,7 +117,7 @@ blockquote {
     padding: 2em;
     top: 0;
     &.normal-page {
-        width: 60em;
+        max-width: 60em;
         margin: auto;
     }
 }
