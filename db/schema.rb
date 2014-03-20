@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140307015502) do
+ActiveRecord::Schema.define(version: 20140320205346) do
 
   create_table "issues", force: true do |t|
     t.integer "repository_id"
