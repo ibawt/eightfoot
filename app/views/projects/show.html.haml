@@ -5,10 +5,14 @@
   .alert.alert-success= notice
 .btn-group
   %a.btn.btn-primary{href: project_issues_path(@project)} Issue Manager
-  %a.btn.btn-default{href: edit_project_path(@project)} Edit Project
+  %a.btn.btn-default{href: edit_project_path(@project)}
+    %i.fa.fa-pencil
+    Edit Project
   %a.btn.btn-default{href: show_repos_project_path(@project)}
+    %i.fa.fa-github
     Manage Repositories
-  %a.btn.btn-default{href: add_labels_project_path(@project)} Manage Project Label Filters
+  - if @project.repositories.any?
+    %a.btn.btn-default{href: add_labels_project_path(@project)} Label Filters
 
 %script
   :plain
