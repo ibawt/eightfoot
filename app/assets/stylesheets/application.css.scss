@@ -190,6 +190,11 @@ blockquote {
 .organization-avatar {
     float: left;
     margin-right: 1em;
+    height: 7em;
+    img {
+        height: 100%;
+        width: auto;
+    }
 }
 .user-add-remove-controls {
     position: absolute;
