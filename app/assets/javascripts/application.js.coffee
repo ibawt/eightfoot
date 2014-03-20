@@ -12,3 +12,7 @@
 #     source = new EventSource('/updates')
 #     source.onmessage = (e) ->
 #   , 1
+
+
+$(document).ready ->
+  $(document).on 'keyup', ".local-filter", Helpers.localSearch

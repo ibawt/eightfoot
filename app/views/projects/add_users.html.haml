@@ -12,7 +12,7 @@
     %a.organization-avatar{href: org.rels[:html].href, target: "_blank"}
       %img{src: org.rels[:avatar].href}
     %h3= org.login
-    %input.local-filter{type: "text", data: {filter_for: org.login}, placeholder: "Quick filter users"}
-  %ul.user-list.local-filterable{data: {name: org.login}}
+    %input.local-filter{type: "text", "data-filter-for" => 'users', placeholder: "Quick filter users"}
+  %ul.user-list.local-filterable{"data-filtered-by" => "users"}
     - org.members.each do |user|
       = render partial: 'shared/user_tile', locals: {user: user, add_button: true, remove_button: false}

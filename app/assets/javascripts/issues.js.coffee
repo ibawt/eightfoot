@@ -35,23 +35,6 @@ $(document).on 'page:load ready page:fetch', ->
           if data.refresh
             location.reload()
 
-  localSearch = _.throttle (ev) ->
-    value = Helpers.searchifyText($(ev.currentTarget).val())
-    portlets = $(".portlet") # may be able to memoize this outside if we're not adding new issues dynamically
-
-    portlets.removeClass("no-match")
-    for ele in portlets
-      title = Helpers.searchifyText($(ele).find(".issue-title").text().toLowerCase().trim())
-      labels = Helpers.searchifyText($(ele).data().labels)
-      author = $(ele).find(".issue-assignee").data("username") || ""
-      author = Helpers.searchifyText(author)
-
-      if title.indexOf(value) == -1 and labels.indexOf(value) == -1 and author.indexOf(value) == -1  # super simple, but works
-        $(ele).addClass("no-match")
-  , 100
-
-  $("#local-filter").on 'keyup', localSearch
-
   $(".issue-label-container").on "click", (ev) ->
     $(ev.currentTarget).toggleClass("expanded")
 
