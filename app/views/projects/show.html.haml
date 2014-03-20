@@ -1,5 +1,6 @@
-- @page_title = @project.name
+- @page_title = ""
 - @page_type = "normal-page"
+
 - if notice
   .alert.alert-success= notice
 .btn-group
@@ -14,6 +15,7 @@
   %ul.list-group
     - @project.repositories.each do |repo|
       %li.list-group-item
+        %i.fa.fa-github
         %a{:href => "https://github.com/#{repo.name}", :target => "_blank"}= repo.name
 - else
   %p

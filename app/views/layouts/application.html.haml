@@ -38,6 +38,9 @@
               %a{:href => destroy_user_session_path} Sign Out
     #main-panel.eightfoot-panel
       - if @page_title
-        %h1.ef-pagetitle= @page_title
+        %h1.ef-pagetitle
+          - if !@project.blank?
+            %span.eightfoot-breadcrumb= link_to(@project.name, @project)
+          =h @page_title
       .eightfoot-body{class: @page_type}
         = yield
