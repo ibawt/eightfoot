@@ -49,4 +49,23 @@ class Project < ActiveRecord::Base
     end
     details
   end
+
+  def invite_user(client, github_nickname)
+    user_info = client.user(github_nickname)
+
+    user = InvitedUser.find_or_initialize_by_nickname(
+      :email => user_info.email,
+      :image => user_info.rels[:avatar].href,
+      :nickname => github_nickname,
+      :uid => user_info.id,
+      :name => user_info.name
+    )
+
+    user.transaction do
+      user.save(:validate => false)
+      self.users << user
+
+      return self.save
+    end
+  end
 end

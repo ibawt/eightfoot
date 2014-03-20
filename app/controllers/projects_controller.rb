@@ -74,24 +74,12 @@ class ProjectsController < ApplicationController
 
     github_nickname = params.require(:username)
 
-    user_info = github_client.user(github_nickname)
+    user_added = @project.invite_user(github_client, github_nickname)
 
-    user = InvitedUser.find_or_initialize_by_nickname(
-      :email => user_info.email,
-      :image => user_info.rels[:avatar].href,
-      :nickname => github_nickname,
-      :uid => user_info.id,
-      :name => user_info.name
-    )
-
-    user.transaction do
-      user.save(:validate => false)
-      @project.users << user
-      if @project.save
-        render json: {}, status: :ok
-      else
-        render json: user.errors, status: :unprocessable_entity
-      end
+    if user_added
+      render json: {}, status: :ok
+    else
+      render json: user.errors, status: :unprocessable_entity
     end
   end
 
