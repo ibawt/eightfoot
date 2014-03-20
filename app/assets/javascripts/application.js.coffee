@@ -3,6 +3,7 @@
 #= require underscore
 #= require turbolinks
 #= require_tree .
+#= require helpers.js.coffee
 #= require bootstrap
 #= require_tree ../../../vendor/assets/javascripts
 

@@ -18,14 +18,11 @@ $(document).on 'page:load ready page:fetch', ->
         )
     )
 
-  searchifyText = (str) ->
-    str.toLowerCase().trim()
-
   localSearch = _.throttle (ev) ->
     toFilter = $(ev.currentTarget).data("filter-for")
     filterTargets = $(".local-filterable[data-name='#{toFilter}'] li")
 
-    search = searchifyText($(ev.currentTarget).val())
+    search = Helpers.searchifyText($(ev.currentTarget).val())
 
     filterTargets.removeClass("no-match")
     for ele in filterTargets
@@ -34,7 +31,7 @@ $(document).on 'page:load ready page:fetch', ->
 
       for value in meta
         matched = false
-        if searchifyText(value).indexOf(search) >= 0
+        if Helpers.searchifyText(value).indexOf(search) >= 0
           matched = true
 
       $ele.addClass("no-match") if !matched
