@@ -1,15 +1,15 @@
 - @page_title = 'Team Projects'
+- @page_type = "normal-page"
+
 = link_to 'New Project', new_project_path
-%table.tablelist
-  %thead
-    %tr
-      %th Name
-      %th
-      %th
-      %th
-  %tbody
+%h1 Projects
+- if @projects.any?
+  %ul.list-group
     - @projects.each do |project|
-      %tr
-        %td= link_to project.name, project_issues_path(project)
-        %td= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+      %li.list-group-item
+        %a{href: project_path(project)}= project.name
+        =link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+- else
+  %p
+    No projects yet.
+    %a{href: new_project_path} Add one.

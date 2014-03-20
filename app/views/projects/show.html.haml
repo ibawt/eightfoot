@@ -1,23 +1,40 @@
-- @page_title = @project.name
+- @page_title = ""
+- @page_type = "normal-page"
+
 - if notice
   .alert.alert-success= notice
-= link_to 'Edit', edit_project_path(@project)
-|
-\#{link_to 'Manage Repositories', show_repos_project_path(@project)} |
-\#{link_to 'Issue Manager', project_issues_path(@project)} |
-\#{link_to 'Add Labels', add_labels_project_path(@project)}
+.btn-group
+  %a.btn.btn-primary{href: project_issues_path(@project)} Issue Manager
+  %a.btn.btn-default{href: edit_project_path(@project)} Edit Project
+  %a.btn.btn-default{href: show_repos_project_path(@project)}
+    Manage Repositories
+  %a.btn.btn-default{href: add_labels_project_path(@project)} Manage Project Label Filters
+
 %h2 Repositories in this project
-%ul
-  - @project.repositories.each do |repo|
-    %li
-      %a{:href => "https://github.com/#{repo.name}", :target => "_blank"}= repo.name
-%h2 Filtering repository issues by:
-%ul
-  - @project.labels.each do |label|
-    %li= label.name
+- if @project.repositories.any?
+  %ul.list-group
+    - @project.repositories.each do |repo|
+      %li.list-group-item
+        %i.fa.fa-github
+        %a{:href => "https://github.com/#{repo.name}", :target => "_blank"}= repo.name
+- else
+  %p
+    You are not pulling issues from any repositories.
+    %a{href: show_repos_project_path} Add some repositories.
+
+- if @project.repositories.any?
+  %h2 Repository issue filters
+  - if @project.labels.any?
+    %ul
+      - @project.labels.each do |label|
+        %li= label.name
+  - else
+    %p
+      You're not pre-filtering your issues by any labels.
+      %a{href: add_labels_project_path} Add some default filters.
 %h2 Settings:
-%ul
-  %li
+%ul.list-group
+  %li.list-group-item
     Max Issues Per Repository: #{@project.max_issues}
-  %li
+  %li.list-group-item
     Display Labels: #{@project.display_labels}

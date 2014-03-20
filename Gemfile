@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.3'
 gem 'mysql2'
-
+gem 'bootstrap_form'
 gem 'unicorn'
 gem 'jbuilder', '~> 1.2'
 gem 'activerecord-import', '>= 0.4.0'

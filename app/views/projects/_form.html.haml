@@ -1,22 +1,5 @@
-= form_for(@project) do |f|
-  - if @project.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@project.errors.count, "error")
-        prohibited this project from being saved:
-      %ul
-        - @project.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = f.label :name
-    %br/
-    = f.text_field :name
-    %br/
-    = f.label :max_issues, "Max Issues Per Repository"
-    %br/
-    = f.number_field :max_issues
-    %br/
-    = f.check_box :display_labels
-    = f.label :display_labels
-  .actions
-    = f.submit
+= bootstrap_form_for(@project) do |f|
+  = f.text_field :name
+  = f.number_field :max_issues
+  = f.check_box :display_labels
+  = f.submit "Save", {class: "btn btn-primary"}
