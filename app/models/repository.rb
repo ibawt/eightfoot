@@ -14,7 +14,10 @@ class Repository < ActiveRecord::Base
     labels.collect(&:name).join(',')
   end
 
-  def regenerate_issues(github_client)
+
+  # eventually we can call the below to regenerate all data we need, only when we know it has changed (e.g., webhook)
+  # TODO: make another method to regenerate just a specific issue
+  def regenerate_issues(project, github_client)
     issues = github_client.list_issues(self.slug, per_page: 100)
 
     next_request = github_client.last_response.rels[:next]
@@ -26,13 +29,18 @@ class Repository < ActiveRecord::Base
 
     # now persist all the issues we got
     issues.each do |i|
-      issue = Issue.find_or_create_by(gh_id: i.id)
+      issue = Issue.find_or_create_by(gh_id: i.id, project_id: project.id, repository_id: self.id)
       # copy data from the API into our issue
       issue.assignee = i.try(:assignee).try(:login)
       issue.title = i.title
       issue.comments_count = i.comments.to_i
       issue.source = i.rels[:html].href
-      issue.labels = i.labels.collect(&:name).join(",")
+
+      i.labels.each do |l|
+        label = Label.find_or_create_by(name: l.name, repository_id: self.id)
+        issue.labels << label if !issue.labels.include? label
+        label.update_attributes(color: l.try(:color))
+      end
 
       if issue.assignee # try to associate it to a copy of our user object, if such an object exists
         user = User.find_by_nickname(issue.assignee)

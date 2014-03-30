@@ -6,7 +6,7 @@ class IssuesController < ApplicationController
 
   def index
     @project.repositories.each do |repo|
-      repo.regenerate_issues(github_client)
+      repo.regenerate_issues(@project, github_client)
       #milestone = find_milestone(repo) if milestone_filtered?
       #update_issue_map(all_issues(repo, milestone),repo) if !milestone_filtered? || milestone
     end

@@ -30,14 +30,14 @@
       - col = 1
       - row = 1
       - @issues.each do |i|
-        - meta = i.labels.split(",") + [i.assignee, i.title]
+        - meta = i.labels.collect(&:name) + [i.assignee, i.title]
         - meta.compact!
         - repo = i.repository
 
         %li{class: "local-filterable portlet issue-repo-#{@project.repositories.index(repo) % 10}", "data-col" => i.col, "data-row" => i.row, "data-sizex" => i.width, "data-sizey" => i.height, :id => i.id, "data-meta" => meta }
           %div{:class => "issue-label-container #{'expanded' if @project.display_labels}"}
-            / - i.labels.split(",").each do |label|
-            /   .issue-label{:style => "background-color:##{label.color};", :title => label.name}= label.name
+            - i.labels.each do |label|
+              .issue-label{:style => "background-color:##{label.color};", :title => label.name}= label.name
           .portlet-header
             - if i.assignee
               .issue-assignee{"data-username" => i.assignee}

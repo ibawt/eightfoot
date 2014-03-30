@@ -4,6 +4,9 @@ class Issue < ActiveRecord::Base
   belongs_to :project
   belongs_to :repository
 
+  has_many :labels, through: :issue_labels
+  has_many :issue_labels
+
   def width
     w = super
     return 1 if w == 0 or w.nil?
