@@ -29,33 +29,31 @@
     %ul.gridster-data.local-filterable{"data-filtered-by" => "issues"}
       - col = 1
       - row = 1
-      - @issues.each do |issue|
-        - hash = @issue_map[issue.id]
-        - i = hash[:issue]
-        - repo = hash[:repo]
-        - meta = i.labels.collect(&:name) + [i.try(:assignee).try(:login), i.title]
+      - @issues.each do |i|
+        - meta = i.labels.split(",") + [i.assignee, i.title]
         - meta.compact!
+        - repo = i.repository
 
-        %li{class: "local-filterable portlet issue-repo-#{@project.repositories.index(repo) % 10}", "data-col" => issue.col, "data-row" => issue.row, "data-sizex" => issue.width, "data-sizey" => issue.height, :id => issue.id, "data-meta" => meta }
+        %li{class: "local-filterable portlet issue-repo-#{@project.repositories.index(repo) % 10}", "data-col" => i.col, "data-row" => i.row, "data-sizex" => i.width, "data-sizey" => i.height, :id => i.id, "data-meta" => meta }
           %div{:class => "issue-label-container #{'expanded' if @project.display_labels}"}
-            - i.labels.each do |label|
-              .issue-label{:style => "background-color:##{label.color};", :title => label.name}= label.name
+            / - i.labels.split(",").each do |label|
+            /   .issue-label{:style => "background-color:##{label.color};", :title => label.name}= label.name
           .portlet-header
-            - if user =  i.try(:assignee)
-              .issue-assignee{"data-username" => user.login}
-                %a{:href => "https://github.com/#{user.login}", :target => "_blank", :title => user.login}
-                  %img.eightfoot-avatar{:alt => user.login, :src => user.rels[:avatar].href}/
+            - if i.assignee
+              .issue-assignee{"data-username" => i.assignee}
+                %a{:href => "https://github.com/#{i.assignee}", :target => "_blank", :title => i.assignee}
+                  / %img.eightfoot-avatar{:alt => user.login, :src => user.rels[:avatar].href}/
             %span
               %span.issue-link
-                %a{:href => i.rels[:html].href, :target => "_blank"}
+                %a{:href => i.source, :target => "_blank"}
                   %i.fa.fa-external-link
-              - if i.comments.to_i > 0
-                %a.comments-link{:href => i.rels[:html].href, :target => "_blank"}
+              - if i.comments_count > 0
+                %a.comments-link{:href => i.source, :target => "_blank"}
                   %i.fa.fa-comments-o
-                  = i.comments
-              - if pr_url = pull_request_url(i)
-                %a.pr-link{:href => pull_request_changes_url(pr_url), :target => "_blank"}
-                  %i.fa.fa-code-fork
+                  = i.comments_count
+              / - if pr_url = pull_request_url(i)
+              /   %a.pr-link{:href => pull_request_changes_url(pr_url), :target => "_blank"}
+              /     %i.fa.fa-code-fork
               %span.issue-title
                 = i.title
 - else

@@ -5,13 +5,12 @@ class IssuesController < ApplicationController
   before_action :get_milestones
 
   def index
-    # this is kind of ugly but it works
-    @issue_map = {}
     @project.repositories.each do |repo|
-      milestone = find_milestone(repo) if milestone_filtered?
-      update_issue_map(all_issues(repo, milestone),repo) if !milestone_filtered? || milestone
+      repo.regenerate_issues(github_client)
+      #milestone = find_milestone(repo) if milestone_filtered?
+      #update_issue_map(all_issues(repo, milestone),repo) if !milestone_filtered? || milestone
     end
-    @issues = @project.issues.where( :gh_id => @issue_map.values.collect {| each | each[:issue].id} )
+    @issues = @project.issues
 
     if params[:labels]
       @labels = params[:labels].split(",")
