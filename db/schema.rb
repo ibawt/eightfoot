@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140330214705) do
+ActiveRecord::Schema.define(version: 20140331052654) do
+
+  create_table "issue_labels", force: true do |t|
+    t.integer "issue_id"
+    t.integer "label_id"
+  end
+
+  add_index "issue_labels", ["issue_id"], name: "index_issue_labels_on_issue_id", using: :btree
+  add_index "issue_labels", ["label_id"], name: "index_issue_labels_on_label_id", using: :btree
 
   create_table "issues", force: true do |t|
     t.integer "repository_id"
@@ -33,14 +41,6 @@ ActiveRecord::Schema.define(version: 20140330214705) do
   add_index "issues", ["repository_id"], name: "index_issues_on_repository_id", using: :btree
   add_index "issues", ["user_id"], name: "index_issues_on_user_id", using: :btree
 
-  create_table "issue_labels", force: true do |t|
-    t.integer "issue_id"
-    t.integer "label_id"
-  end
-
-  add_index "issue_labels", ["issue_id"], name: "index_issue_labels_on_issue_id", using: :btree
-  add_index "issue_labels", ["label_id"], name: "index_issue_labels_on_label_id", using: :btree
-
   create_table "labels", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -54,6 +54,25 @@ ActiveRecord::Schema.define(version: 20140330214705) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "organization_users", force: true do |t|
+    t.integer "organization_id"
+    t.integer "user_id"
+  end
+
+  add_index "organization_users", ["organization_id"], name: "index_organization_users_on_organization_id", using: :btree
+  add_index "organization_users", ["user_id"], name: "index_organization_users_on_user_id", using: :btree
+
+  create_table "organizations", force: true do |t|
+    t.string   "avatar"
+    t.string   "source"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "gh_id",      limit: 8
+  end
+
+  add_index "organizations", ["gh_id"], name: "index_organizations_on_gh_id", using: :btree
 
   create_table "project_labels", force: true do |t|
     t.integer  "label_id"

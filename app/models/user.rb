@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :projects, through: :project_users
   has_many :repositories
   has_many :issues
+  has_many :organization_users
+  belongs_to :organization
 
   def self.find_for_github_auth(auth)
     where(auth.slice(:provider,:uid)).first_or_initialize.tap do |user|
