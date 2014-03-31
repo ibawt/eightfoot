@@ -8,10 +8,10 @@
 %h2 People from your organizations:
 - @organizations.each do |org|
   .organization-header
-    %a.organization-avatar{href: org.rels[:html].href, target: "_blank"}
-      %img{src: org.rels[:avatar].href}
-    %h3= org.login
+    .organization-avatar
+      %img{src: org.avatar}
+    %h3= org.name
     %input.local-filter{type: "text", "data-filter-for" => 'users', placeholder: "Quick filter users"}
   %ul.user-list.local-filterable{"data-filtered-by" => "users"}
-    - org.members.each do |user|
+    - org.users.each do |user|
       = render partial: 'shared/user_tile', locals: {user: user, add_button: true, remove_button: false}

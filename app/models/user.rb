@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     gh_orgs.each do |o|
       organization = Organization.find_or_create_by(gh_id: o.id)
       organization.avatar = o.rels[:avatar].href
-      organization.source = o.rels[:html].href
+      organization.source = o.rels[:self].href
       organization.name = o.login
 
       if !organization.users.include? self

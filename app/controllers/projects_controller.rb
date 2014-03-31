@@ -68,7 +68,11 @@ class ProjectsController < ApplicationController
   def add_users
     @repos = @project.repositories
     current_user.regenerate_organizations(github_client)
-    @organizations = @project.organizations(github_client)
+    # TODO: do this block at a sensible time! not every time
+    current_user.organizations.each do |o|
+      o.regenerate_users(github_client)
+    end
+    @organizations = current_user.organizations
   end
 
   def add_user
