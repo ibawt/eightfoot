@@ -67,6 +67,7 @@ class ProjectsController < ApplicationController
 
   def add_users
     @repos = @project.repositories
+    current_user.regenerate_organizations(github_client)
     @organizations = @project.organizations(github_client)
   end
 

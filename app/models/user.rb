@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :repositories
   has_many :issues
   has_many :organization_users
-  belongs_to :organization
+  has_many :organizations, through: :organization_users
 
   def self.find_for_github_auth(auth)
     where(auth.slice(:provider,:uid)).first_or_initialize.tap do |user|
@@ -28,5 +28,26 @@ class User < ActiveRecord::Base
         user.save!
       end
     end
+  end
+
+  def regenerate_organizations(gh_client)
+    gh_orgs = []
+    gh_client.organizations.each do |gh_org|
+      gh_orgs << gh_client.get(gh_org.rels[:self].href, { per_page: 100, sort: 'login' })
+    end
+
+    gh_orgs.each do |o|
+      organization = Organization.find_or_create_by(gh_id: o.id)
+      organization.avatar = o.rels[:avatar].href
+      organization.source = o.rels[:html].href
+      organization.name = o.login
+
+      if !organization.users.include? self
+        organization.users << self
+      end
+      organization.save
+    end
+
+
   end
 end
