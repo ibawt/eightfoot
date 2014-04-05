@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @detailed_users = @project.detailed_users(github_client)
   end
 
   def new

@@ -49,7 +49,7 @@
     Display Labels: #{@project.display_labels}
 %h2 Users with access to this project:
 %ul.user-list.local-filterable
-  - @detailed_users.each do |user|
+  - @project.users.each do |user|
     = render partial: 'shared/user_tile', locals: {user: user, remove_button: true, add_button: false}
 
 = link_to 'Add Users', add_users_project_path(@project)
