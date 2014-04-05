@@ -11,6 +11,7 @@
     .organization-avatar
       %img{src: org.avatar}
     %h3= org.name
+    = link_to 'Refresh users', regenerate_users_organization_path(org)
     %input.local-filter{type: "text", "data-filter-for" => 'users', placeholder: "Quick filter users"}
   %ul.user-list.local-filterable{"data-filtered-by" => "users"}
     - org.users.each do |user|

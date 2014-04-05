@@ -23,6 +23,12 @@ Eightfoot::Application.routes.draw do
     end
   end
 
+  resources :organizations do
+    member do
+      get 'regenerate_users'
+    end
+  end
+
   get 'updates' => 'updates#index'
 
   devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
