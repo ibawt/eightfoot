@@ -66,10 +66,14 @@ class ProjectsController < ApplicationController
 
   def add_users
     @repos = @project.repositories
-    current_user.regenerate_organizations(github_client)
+    current_user.regenerate_organizations(github_client) # fetch all gh orgs
     # TODO: do this block at a sensible time! not every time
     current_user.organizations.each do |o|
-      o.regenerate_users(github_client)
+      if o.updated_at + 2.hours < Time.now
+        o.regenerate_users(github_client)
+        o.updated_at = Time.now
+        o.save
+      end
     end
     @organizations = current_user.organizations
   end
