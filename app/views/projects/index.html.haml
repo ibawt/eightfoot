@@ -8,7 +8,10 @@
     - @projects.each do |project|
       %li.list-group-item
         %a{href: project_path(project)}= project.name
-        =link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+        .project-options
+          =link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_project_path(project)
+          =link_to '<i class="fa fa-trash-o"></i>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }
+
 - else
   %p
     No projects yet.

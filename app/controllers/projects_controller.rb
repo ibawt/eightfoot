@@ -2,10 +2,11 @@ class ProjectsController < ApplicationController
   before_action :set_project, except: [:index, :new, :create]
 
   def index
-    @projects = Project.all
+    @projects = current_user.projects.load
   end
 
   def show
+    @detailed_users = @project.detailed_users(github_client)
   end
 
   def new
@@ -64,6 +65,34 @@ class ProjectsController < ApplicationController
     redirect_to show_repos_project_path
   end
 
+  def add_users
+    @repos = @project.repositories
+    @organizations = @project.organizations(github_client)
+  end
+
+  def add_user
+
+    github_nickname = params.require(:username)
+
+    user_added = @project.invite_user(github_client, github_nickname)
+
+    if user_added
+      render json: {}, status: :ok
+    else
+      render json: user.errors, status: :unprocessable_entity
+    end
+  end
+
+  def remove_user
+    user = User.find_by_nickname(params[:username])
+    @project.users.delete(user)
+    if @project.save
+      render json: {}, status: :ok
+    else
+      render json: @project.errors, status: :unprocessable_entity
+    end
+  end
+
   def search_repos
     results = github_client.get("/search/repositories?q=#{params[:term]}")
     names = results.items.collect(&:full_name)
@@ -86,6 +115,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @project.users << current_user
 
     respond_to do |format|
       if @project.save
@@ -125,7 +155,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:id] || params[:project_id])
+    @project = current_user.projects.find(params[:id] || params[:project_id])
   end
 
   def project_params

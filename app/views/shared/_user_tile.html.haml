@@ -1,0 +1,11 @@
+%li.user-tile{data: {meta: [user.login]}}
+  .user-avatar
+    %img{src: user.rels[:avatar].href}
+    - if current_user.nickname != user.login
+      .user-add-remove-controls
+        - if add_button
+          %i.fa.fa-plus-square.user-add-button.button{data: {username: user.login}}
+        - if remove_button
+          %i.fa.fa-minus-square.user-remove-button.button{data: {username: user.login}}
+  %span.user-login
+    %a{href: user.rels[:html].href, target: "_blank"}= user.login

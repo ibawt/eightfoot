@@ -20,10 +20,6 @@
         background-position: center center;
     }
     transition: opacity 0.25s ease-in-out;
-    &.no-match {
-        opacity: 0.35;
-    }
-
    &.issue-repo-0 {
       background-color: #e4eff7;
     }

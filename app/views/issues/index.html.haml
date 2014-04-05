@@ -18,7 +18,7 @@
         %option{:value => title}= title
   %label{:for => "local-filter"}
     Filter
-    %input#local-filter{:placeholder => "Quick filter issues", :type => "text"}/
+    %input.local-filter{:placeholder => "Quick filter issues", :type => "text", "data-filter-for" => 'issues'}
     %button#labels-button.btn.btn-sm.btn-default.label-legend-button Toggle Labels
 - if @issues.size > 0
   #column_headers.column-headers
@@ -26,14 +26,17 @@
       .column-heading
         %input{:id => "col-header-#{i}", :type => "text", :value => @project.column_headers[i.to_s]}/
   .gridster
-    %ul.gridster-data
+    %ul.gridster-data.local-filterable{"data-filtered-by" => "issues"}
       - col = 1
       - row = 1
       - @issues.each do |issue|
         - hash = @issue_map[issue.id]
         - i = hash[:issue]
         - repo = hash[:repo]
-        %li{:class => "portlet issue-repo-#{@project.repositories.index(repo) % 10}", "data-col" => issue.col, "data-labels" => i.labels.collect(&:name).join(','), "data-row" => issue.row, "data-sizex" => issue.width, "data-sizey" => issue.height, :id => issue.id}
+        - meta = i.labels.collect(&:name) + [i.try(:assignee).try(:login), i.title]
+        - meta.compact!
+
+        %li{class: "local-filterable portlet issue-repo-#{@project.repositories.index(repo) % 10}", "data-col" => issue.col, "data-row" => issue.row, "data-sizex" => issue.width, "data-sizey" => issue.height, :id => issue.id, "data-meta" => meta }
           %div{:class => "issue-label-container #{'expanded' if @project.display_labels}"}
             - i.labels.each do |label|
               .issue-label{:style => "background-color:##{label.color};", :title => label.name}= label.name
