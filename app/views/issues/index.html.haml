@@ -42,7 +42,8 @@
             - if i.assignee
               .issue-assignee{"data-username" => i.assignee}
                 %a{:href => "https://github.com/#{i.assignee}", :target => "_blank", :title => i.assignee}
-                  / %img.eightfoot-avatar{:alt => user.login, :src => user.rels[:avatar].href}/
+                  - user = User.find_by_nickname(i.assignee)
+                  %img.eightfoot-avatar{:alt => i.assignee, :src => user.image}
             %span
               %span.issue-link
                 %a{:href => i.source, :target => "_blank"}
@@ -51,9 +52,6 @@
                 %a.comments-link{:href => i.source, :target => "_blank"}
                   %i.fa.fa-comments-o
                   = i.comments_count
-              / - if pr_url = pull_request_url(i)
-              /   %a.pr-link{:href => pull_request_changes_url(pr_url), :target => "_blank"}
-              /     %i.fa.fa-code-fork
               %span.issue-title
                 = i.title
 - else
