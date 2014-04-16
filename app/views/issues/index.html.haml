@@ -24,7 +24,7 @@
   #column_headers.column-headers
     - (1..num_cols).each do |i|
       .column-heading
-        %input{:id => "col-header-#{i}", :type => "text", :value => @project.column_headers[i.to_s]}/
+        %input{:id => "col-header-#{i}", :type => "text", :value => column_header(i)}/
   .gridster
     %ul.gridster-data.local-filterable{"data-filtered-by" => "issues"}
       - col = 1
