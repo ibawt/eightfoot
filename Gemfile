@@ -46,7 +46,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'pry-rails'
-  gem 'debugger'
   gem 'puma'
   gem 'spring'
   gem 'pry-byebug'
