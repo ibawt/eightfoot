@@ -27,13 +27,12 @@ We thought you might like to take a look at the design of eightfoot as we iterat
 -----
 
 1. `bundle install`
-2. `bundle exec rake db:setup`
-3. `bundle exec rake db:migrate` (it doesn't auto-migrate atm)
-4. Create an application on GitHub, make the URL and callback URL http://localhost:4000
-5. `export CLIENT_ID=#{the ID the application in step 4 made}`
-6. `export CLIENT_SECRET=#{the secret the application in step 4 made}`
-7. `bundle exec foreman`
-8. Visit [http://localhost:4000](http://localhost:4000) and log in with your GitHub account credentials
+2. `bundle exec rake db:setup db:migrate db:test:clone` (it doesn't auto-migrate atm)
+3. Create an [application on GitHub](https://github.com/settings/applications/new), make the URL and callback URL http://localhost:4000
+4. `export CLIENT_ID=#{the ID the application in step 4 made}`
+5. `export CLIENT_SECRET=#{the secret the application in step 4 made}`
+6. `bundle exec foreman`
+7. Visit [http://localhost:4000](http://localhost:4000) and log in with your GitHub account credentials
 
 Try not testing it against any majorly sensitive repos right now!!
 
